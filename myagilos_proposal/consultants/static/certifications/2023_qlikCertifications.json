@@ -1,0 +1,80 @@
+{
+  "company": "QLIK",
+  "certifications": [
+    {
+      "name": "Data Literacy Certification",
+      "link": null,
+      "code": "DLC"
+    },
+    {
+      "name": "Data Analytics Certification",
+      "link": null,
+      "code": "DAC"
+    },
+    {
+      "name": "Qlik Sense Business Analyst Certification",
+      "link": "http://www.pearsonvue.com/qlik",
+      "code": "QSBAC"
+    },
+    {
+      "name": "Qlik Sense Data Architect Certification",
+      "link": "http://www.pearsonvue.com/qlik",
+      "code": "QSDAC"
+    },
+    {
+      "name": "Qlik Sense System Administrator Certification",
+      "link": "http://www.pearsonvue.com/qlik",
+      "code": "QSSAC"
+    },
+    {
+      "name": "Qlik Sense SaaS Business Analyst Endorsement",
+      "link": "/us/services/training/certifications-and-qualifications/saas-endorsement-registration",
+      "code": "QSSBAE"
+    },
+    {
+      "name": "Qlik Sense SaaS Data Architect Endorsement",
+      "link": "/us/services/training/certifications-and-qualifications/saas-endorsement-registration",
+      "code": "QSSDAE"
+    },
+    {
+      "name": "Qlik Sense SaaS Administrator Endorsement",
+      "link": "/us/services/training/certifications-and-qualifications/saas-endorsement-registration",
+      "code": "QSSAE"
+    },
+    {
+      "name": "Qlik Sense Business Analyst Qualification",
+      "link": null,
+      "code": "QSBAQ"
+    },
+    {
+      "name": "Qlik Sense Data Architect Qualification",
+      "link": null,
+      "code": "QSDAQ"
+    },
+    {
+      "name": "QlikView Business Analyst Certification",
+      "link": "http://www.pearsonvue.com/qlik",
+      "code": "QBAC"
+    },
+    {
+      "name": "QlikView Data Architect Certification",
+      "link": "http://www.pearsonvue.com/qlik",
+      "code": "QDAC"
+    },
+    {
+      "name": "QlikView System Administrator Certification",
+      "link": "http://www.pearsonvue.com/qlik",
+      "code": "QSAC"
+    },
+    {
+      "name": "Qlik Compose Certification",
+      "link": null,
+      "code": "QCC"
+    },
+    {
+      "name": "Qlik Replicate Certification",
+      "link": null,
+      "code": "QRC"
+    }
+  ]
+}

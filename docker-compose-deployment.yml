@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  myagilos:
+    image: myagilos:1.0.0
+    container_name: myagilos
+    build:
+      context: .
+    volumes:
+      - static_data:/vol/web
+    environment:
+      - SECRET_KEY=samplesecretkey123
+      - ALLOWED_HOSTS=127.0.0.1,localhost
+  
+  proxy:
+    image: myagilos-proxy:1.0.0
+    container_name: myagilos-proxy
+    build:
+      context: ./proxy
+    volumes:
+      - static_data:/vol/static
+    ports:
+      - 8080:8080
+    depends_on:
+      - myagilos
+  
+volumes:
+  static_data:

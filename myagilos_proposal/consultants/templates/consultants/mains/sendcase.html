@@ -1,0 +1,55 @@
+{% extends "consultants/layouts/base.html" %}
+{% load static %}
+{% load icon %}
+{# HEAD #}
+    {# Style #}
+    {% block style %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% endblock style %}
+
+    {# Javascript #}
+    {% block javascript %}
+    <script src="{% static "disable-sending.js" %}"></script>
+    <script src="{% static "gptform.js" %}"></script>
+    <script src="{% static "input-auto-height.js" %}"></script>
+    <script src="{% static "remove_lastchar.js" %}"></script>
+    {% endblock javascript %}
+
+    {# Title #}
+    {% block page_title %}MyAgilos - Send a Case{% endblock page_title %}
+
+
+{# BODY #}
+{% block side_container %}
+    
+    {# HEADER #}
+    {% include "consultants/includes/sidebar.html" %}
+    {# MAIN #}
+    <main>
+        {# FORM #}
+        {% if form %}
+        {% with iconsize=26 %}
+            {% include "consultants/includes/sendcase_form.html" with icon_size=26 %}
+        {% endwith %}
+        {% comment %} <h1>Request</h1>
+        <ul>{% for key, value in request.session.items %}
+            <li>{{ key }}: {{ value }}</li>{% endfor %}
+            <li>{{ request.cookie }}</li>
+            <li>{{ request.user }}</li>
+            <li>{{ request.method }}</li>
+            <li>{{ request.content_type }}</li>
+            <li>{{ request.GET }}</li>
+            <li>{{ request.path }}</li>
+            <li>{{ request.post }}</li>
+            <li>{{ request.files }}</li>
+            <li>{{ request.META }}</li>
+            <li>{{ request.headers }}</li>
+            <li>{{ request.current_app }}</li>
+            <li>username: {{ request.user }}</li>
+            <li>is user authenticated? {{ request.user.is_authenticated }}</li>
+            <li>{{ request.site }}</li>
+            <li>is request secure? {{ request.is_secure }}</li>
+        </ul> {% endcomment %}
+        {% endif %}
+    </main>
+{% endblock side_container %}

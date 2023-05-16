@@ -1,0 +1,180 @@
+{% load icon %}
+<form id="reference-case-form" method="POST">
+    {% csrf_token %}
+        <div class="introduction-part parts">
+            <p class="subtitles">Introduction</p>
+            <div class="div-field" id="div-company">
+                {{ form.company.errors }}
+                <div class="label-icons">
+                    {% icon "user" class="svg-blue" height="26" width="26" %}
+                    {{ form.company.label_tag }}
+                </div>
+                {{ form.company }}
+            </div>
+            <div class="div-field" id="div-industry">
+                {{ form.industry.errors }}
+                <div class="label-icons">
+                    {% icon "list" class="svg-blue" height="26" width="26" %}
+                    {{ form.industry.label_tag }}
+                </div>
+                {{ form.industry }}
+            </div>
+            <div class="div-field" id="div-start-date">
+                {{ form.project_start.errors }}
+                <div class="label-icons">
+                    {% icon "clock" class="svg-blue" height="26" width="26" %}
+                    {{ form.project_start.label_tag }}
+                </div>
+                {{ form.project_start }}
+            </div>
+            <div class="div-field" id="div-end-date">
+                {{ form.project_end.errors }}
+                <div class="label-icons">
+                    {% icon "clock" class="svg-blue" height="26" width="26" %}
+                    {{ form.project_end.label_tag }}
+                </div>
+                {{ form.project_end }}
+            </div>
+        </div>
+        <div class="problem-part parts">
+            <p class="subtitles">Problem</p>
+            <div class="div-field" id="div-issue">
+                {{ form.issue.errors }}
+                <div class="label-icons">
+                    {% icon "alert-circle" class="svg-blue" height="26" width="26" %}
+                    {{ form.issue.label_tag }}
+                </div>
+                {{ form.issue }}
+            </div>
+            <div class="div-field" id="div-architecture">
+                {{ form.architecture.errors }}
+                <div class="label-icons">
+                    {% icon "database" class="svg-blue" height="26" width="26" %}
+                    {{ form.architecture.label_tag }}
+                </div>
+                {{ form.architecture }}
+            </div>
+            <div class="div-field" id="div-challenge">
+                {{ form.challenge.errors }}
+                <div class="label-icons">
+                    {% icon "award" class="svg-blue" height="26" width="26" %}
+                    {{ form.challenge.label_tag }}
+                </div>
+                {{ form.challenge }}
+            </div>
+        </div>
+        <div class="solution-part parts">
+            <p class="subtitles">Solution</p>
+            <div class="div-field" id="div-solution">
+                {{ form.solution.errors }}
+                <div class="label-icons">
+                    {% icon "check-circle" class="svg-blue" height="26" width="26" %}
+                    {{ form.solution.label_tag }}
+                </div>
+                {{ form.solution }}
+            </div>
+            <div class="div-field" id="div-tools">
+                {{ form.tools.errors }}
+                <div class="label-icons">
+                    {% icon "tool" class="svg-blue" height="26" width="26" %}
+                    {{ form.tools.label_tag }}
+                </div>
+                {{ form.tools }}
+            </div>
+        </div>
+        <div class="agilos parts">
+            <p class="subtitles">Agilos</p>
+            <div class="div-field" id="div-why-agilos">
+                {{ form.why_agilos.errors }}
+                <div class="label-icons">
+                    {% icon "star" class="svg-blue" height="26" width="26" %}
+                    {{ form.why_agilos.label_tag }}
+                </div>
+                {{ form.why_agilos }}
+            </div>
+        </div>
+        <div class="gpt-content hide parts">
+            <p class="subtitles">GPT Content</p>
+            <div class="div-field" id="div-gpt-content">
+                {{ form.gpt_content.errors }}
+                <div class="label-icons">
+                    {% icon "info" class="svg-blue" height="26" width="26" %}
+                    {{ form.gpt_content.label_tag }}
+                </div>
+                {{ form.gpt_content }}
+            </div>
+        </div>
+        <div class="submit-part parts" id="reference-case-submit-div">
+            <p class="subtitles">Send</p>
+            <button id="process-button">GPT Process</button>
+            <div id="loader"></div>
+            <input id="reference-case-submit-button" type="submit" value="Send">
+        </div>
+</form>
+
+{# HARD HTML #}
+{% comment %} <form id="reference-case-form">
+    <div class="introduction-part parts">
+        <p class="subtitles">Introduction</p>
+        <div class="div-field" id="div-company">
+            <label for="company">Company</label>
+            <input id="company" name="company" placeholder="Select a company" type="text">
+        </div>
+        <div class="div-field" id="div-industry">
+            <label for="industry">Industry</label>
+            <select id="industry" name="industry">
+                <option disabled selected value="">-</option>
+                <option value="construction">Construction</option>
+                <option value="health">Health</option>
+                <option value="european-institution">European Institution</option>
+                <option value="bank">Bank</option>
+                <option value="finance">Finance</option>
+            </select>
+        </div>
+        <div class="div-field" id="div-start-date">
+            <label for="start-date">Start date</label>
+            <input id="start-date" name="start-date" type="date">
+        </div>
+        <div class="div-field" id="div-end-date">
+            <label for="end-date">End date</label>
+            <input id="end-date" name="end-date" type="date">
+        </div>
+    </div>
+    <div class="problem-part parts">
+        <p class="subtitles">Problem</p>
+        <div class="div-field" id="div-issue">
+            <label for="issue">Issue</label>
+            <input id="issue" name="issue" placeholder="What problem was the customer facing?" type="text">
+        </div>
+        <div class="div-field" id="div-architecture">
+            <label for="architecture">Architecture</label>
+            <input id="architecture" name="architecture" placeholder="What architecture was implemented before the project?" type="text">
+        </div>
+        <div class="div-field" id="div-challenge">
+            <label for="challenge">Challenge</label>
+            <input id="challenge" name="challenge" placeholder="What was the challenge with this project?" type="text">
+        </div>
+    </div>
+    <div class="solution-part parts">
+        <p class="subtitles">Solution</p>
+        <div class="div-field" id="div-solution">
+            <label for="solution">Solution</label>
+            <input id="solution" name="solution" placeholder="What was the provided solution? How did it help the customer?" type="text">
+        </div>
+        <div class="div-field" id="div-tools">
+            <label for="tools">Tools</label>
+            <input id="tools" name="tools" placeholder="Which tools did you use? For what reasons?" type="text">
+        </div>
+    </div>
+    <div class="agilos parts">
+        <p class="subtitles">Agilos</p>
+        <div class="div-field" id="div-why-agilos">
+            <label for="why-agilos">Why Agilos?</label>
+            <input id="why-agilos" name="why-agilos" placeholder="For what reasons do you think the customer chose to work with Agilos?" type="text">
+        </div>
+    </div>
+    <div class="submit-part" id="reference-case-submit-div">
+        <p class="subtitles">Send</p>
+        <input id="reference-case-submit-button" type="submit">
+    </div>
+</form> {% endcomment %}

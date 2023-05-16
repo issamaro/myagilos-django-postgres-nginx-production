@@ -1,0 +1,34 @@
+{% load static %}
+<div class="header">
+    <header>
+        <div class="header-greetings">
+            <span id="greetings-hello">Hello, </span><span id="greetings-firstname">{{ user.first_name }}</span>
+        </div>
+        <div class="header-current-page">
+            <a href="{% url "consultants:home" %}" id="header-home-title">Home</a>
+        </div>
+        <div class="header-certifications">
+            <p class="header-subtitle" id="header-certifications-title">Certifications</p>
+            <a class="header-certifications-links" href="{% url "consultants:mycertifications" %}">My certifications</a>
+            <a class="header-certifications-links" href="{% url "consultants:addcertification" %}">Add certification</a>
+        </div>
+        <div class="header-cases">
+            <p class="header-subtitle" id="header-cases-title">Reference cases</p>
+            <a class="header-cases-links" id="header-cases-mycases-link" href="{% url "consultants:mycases" %}">My cases</a>
+            <a class="header-cases-links" id="header-cases-sendcase-link" href="{% url "consultants:sendcase" %}">Send a case</a>
+        </div>
+        <div class="header-endstuffs">
+            <div class="header-settings">
+                <p class="header-subtitle" id="header-profile-title">Profile</p>
+                <a href="" class="header-profile-links">Settings</a>
+                <a href="" class="header-profile-links">Help</a>
+            </div>
+            <div class="header-logout">
+                <button id="logout"><a href="{% url 'consultants:logout' %}">Log out</a></button>
+            </div>
+            <div class="header-logo">
+                <img src="{% static "agilos-logo.png" %}" alt="Agilos company's logo" height="auto" width="160">
+            </div>
+        </div>
+    </header>
+</div>

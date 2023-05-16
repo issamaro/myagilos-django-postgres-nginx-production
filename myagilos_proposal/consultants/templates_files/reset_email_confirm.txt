@@ -1,0 +1,8 @@
+Hello {first_name},
+
+Your password has been successfully reset in MyAgilos.
+
+If you are not the one who made this request, please, change your password and contact the IT support team.
+
+Sincerely yours,
+The Agilos Team.

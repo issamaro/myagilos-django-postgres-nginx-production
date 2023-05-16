@@ -1,0 +1,465 @@
+{
+  "company": "MICROSOFT",
+  "certifications": [
+    {
+      "name": "Microsoft 365 Certified: Collaboration Communications Systems Engineer Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/m365-collaboration-communications-systems-engineer/",
+      "code": "MS-721"
+    },
+    {
+      "name": "Microsoft 365 Certified: Enterprise Administrator Expert",
+      "link": "https://learn.microsoft.com/en-us/certifications/m365-enterprise-administrator/",
+      "code": "MS-102"
+    },
+    {
+      "name": "Microsoft 365 Certified: Exchange Online Support Engineer Specialty",
+      "link": "https://learn.microsoft.com/en-us/certifications/m365-exchange-online-support-engineer-specialty/",
+      "code": "MS-220"
+    },
+    {
+      "name": "Microsoft 365 Certified: Fundamentals",
+      "link": "https://learn.microsoft.com/en-us/certifications/microsoft-365-fundamentals/",
+      "code": "MS-900"
+    },
+    {
+      "name": "Microsoft 365 Certified: Messaging Administrator Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/m365-messaging-administrator/",
+      "code": "MS-203"
+    },
+    {
+      "name": "Microsoft 365 Certified: Modern Desktop Administrator Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/modern-desktop/",
+      "code": "MD-102"
+    },
+    {
+      "name": "Microsoft 365 Certified: Security Administrator Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/m365-security-administrator/",
+      "code": "MS-500"
+    },
+    {
+      "name": "Microsoft 365 Certified: Teams Administrator Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/m365-teams-administrator-associate/",
+      "code": "MS-700"
+    },
+    {
+      "name": "Microsoft 365 Certified: Teams Application Developer Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/m365-teams-application-developer-associate/",
+      "code": "MS-600"
+    },
+    {
+      "name": "Microsoft 365 Certified: Teams Support Engineer Specialty",
+      "link": "https://learn.microsoft.com/en-us/certifications/m365-teams-support-engineer-specialty/",
+      "code": "MS-740"
+    },
+    {
+      "name": "Microsoft 365 Certified: Teams Voice Engineer Expert",
+      "link": "https://learn.microsoft.com/en-us/certifications/m365-teams-voice-engineer-expert/",
+      "code": "MS-720"
+    },
+    {
+      "name": "Microsoft Certified Educator",
+      "link": "https://learn.microsoft.com/en-us/certifications/microsoft-certified-educator/",
+      "code": "62-193"
+    },
+    {
+      "name": "Microsoft Certified: Azure AI Engineer Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-ai-engineer/",
+      "code": "AI-102"
+    },
+    {
+      "name": "Microsoft Certified: Azure AI Fundamentals",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-ai-fundamentals/",
+      "code": "AI-900"
+    },
+    {
+      "name": "Microsoft Certified: Azure Administrator Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-administrator/",
+      "code": "AZ-104"
+    },
+    {
+      "name": "Microsoft Certified: Azure Cosmos DB Developer Specialty",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-cosmos-db-developer-specialty/",
+      "code": "DP-420"
+    },
+    {
+      "name": "Microsoft Certified: Azure Data Engineer Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-data-engineer/",
+      "code": "DP-203"
+    },
+    {
+      "name": "Microsoft Certified: Azure Data Fundamentals",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-data-fundamentals/",
+      "code": "DP-900"
+    },
+    {
+      "name": "Microsoft Certified: Azure Data Scientist Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-data-scientist/",
+      "code": "DP-100"
+    },
+    {
+      "name": "Microsoft Certified: Azure Database Administrator Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-database-administrator-associate/",
+      "code": "DP-300"
+    },
+    {
+      "name": "Microsoft Certified: Azure Developer Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-developer/",
+      "code": "AZ-204"
+    },
+    {
+      "name": "Microsoft Certified: Azure Enterprise Data Analyst Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-enterprise-data-analyst-associate/",
+      "code": "DP-500"
+    },
+    {
+      "name": "Microsoft Certified: Azure Fundamentals",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-fundamentals/",
+      "code": "AZ-900"
+    },
+    {
+      "name": "Microsoft Certified: Azure IoT Developer Specialty",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-iot-developer-specialty/",
+      "code": "AZ-220"
+    },
+    {
+      "name": "Microsoft Certified: Azure Network Engineer Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-network-engineer-associate/",
+      "code": "AZ-700"
+    },
+    {
+      "name": "Microsoft Certified: Azure Security Engineer Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-security-engineer/",
+      "code": "AZ-500"
+    },
+    {
+      "name": "Microsoft Certified: Azure Solutions Architect Expert",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-solutions-architect/",
+      "code": "AZ-305"
+    },
+    {
+      "name": "Microsoft Certified: Azure Stack Hub Operator Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-stack-hub-operator/",
+      "code": "AZ-600"
+    },
+    {
+      "name": "Microsoft Certified: Azure Support Engineer for Connectivity Specialty",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-support-engineer-for-connectivity-specialty/",
+      "code": "AZ-720"
+    },
+    {
+      "name": "Microsoft Certified: Azure Virtual Desktop Specialty",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-virtual-desktop-specialty/",
+      "code": "AZ-140"
+    },
+    {
+      "name": "Microsoft Certified: Azure for SAP Workloads Specialty",
+      "link": "https://learn.microsoft.com/en-us/certifications/azure-for-sap-workloads-specialty/",
+      "code": "AZ-120"
+    },
+    {
+      "name": "Microsoft Certified: Customer Data Platform Specialty",
+      "link": "https://learn.microsoft.com/en-us/certifications/customer-data-platform-specialty/",
+      "code": "MB-260"
+    },
+    {
+      "name": "Microsoft Certified: Cybersecurity Architect Expert",
+      "link": "https://learn.microsoft.com/en-us/certifications/cybersecurity-architect-expert/",
+      "code": "SC-100"
+    },
+    {
+      "name": "Microsoft Certified: DevOps Engineer Expert",
+      "link": "https://learn.microsoft.com/en-us/certifications/devops-engineer/",
+      "code": "AZ-400"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Business Central Functional Consultant Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-business-central-functional-consultant-associate/",
+      "code": "MB-800"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Commerce Functional Consultant Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-functional-consultant-commerce/",
+      "code": "MB-300, MB-340"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-functional-consultant-customer-service/",
+      "code": "MB-230"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Field Service Functional Consultant Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-functional-consultant-field-service/",
+      "code": "MB-240"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Finance Functional Consultant Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-functional-consultant-financials/",
+      "code": "MB-300, MB-310"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Fundamentals (CRM)",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-fundamentals-customer-engagement-apps-crm/",
+      "code": "MB-910"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Fundamentals (ERP)",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-fundamentals-finance-and-operations-apps-erp/",
+      "code": "MB-920"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Marketing Functional Consultant Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-functional-consultant-marketing/",
+      "code": "MB-220"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Sales Functional Consultant Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-functional-consultant-sales/",
+      "code": "MB-210"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Supply Chain Management Functional Consultant Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-functional-consultant-supply-chain-management/",
+      "code": "MB-300, MB-330"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Supply Chain Management Functional Consultant Expert",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-supply-chain-management-functional-consultant-expert/",
+      "code": "MB-335"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365 Supply Chain Management, Manufacturing Functional Consultant Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-functional-consultant-manufacturing/",
+      "code": "MB-300, MB-320"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365: Finance and Operations Apps Developer Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-finance-and-operations-apps-developer-associate/",
+      "code": "MB-300, MB-500"
+    },
+    {
+      "name": "Microsoft Certified: Dynamics 365: Finance and Operations Apps Solution Architect Expert",
+      "link": "https://learn.microsoft.com/en-us/certifications/d365-finance-and-operations-apps-solution-architect-expert/",
+      "code": "MB-700"
+    },
+    {
+      "name": "Microsoft Certified: Identity and Access Administrator Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/identity-and-access-administrator/",
+      "code": "SC-300"
+    },
+    {
+      "name": "Microsoft Certified: Information Protection Administrator Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/information-protection-administrator/",
+      "code": "SC-400"
+    },
+    {
+      "name": "Microsoft Certified: Power Automate RPA Developer Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/power-automate-rpa-developer-associate/",
+      "code": "PL-500"
+    },
+    {
+      "name": "Microsoft Certified: Power BI Data Analyst Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/power-bi-data-analyst-associate/",
+      "code": "PL-300"
+    },
+    {
+      "name": "Microsoft Certified: Power Platform App Maker Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/power-platform-app-maker/",
+      "code": "PL-100"
+    },
+    {
+      "name": "Microsoft Certified: Power Platform Developer Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/power-platform-developer-associate/",
+      "code": "PL-400"
+    },
+    {
+      "name": "Microsoft Certified: Power Platform Functional Consultant Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/power-platform-functional-consultant-associate/",
+      "code": "PL-200"
+    },
+    {
+      "name": "Microsoft Certified: Power Platform Fundamentals",
+      "link": "https://learn.microsoft.com/en-us/certifications/power-platform-fundamentals/",
+      "code": "PL-900"
+    },
+    {
+      "name": "Microsoft Certified: Power Platform Solution Architect Expert",
+      "link": "https://learn.microsoft.com/en-us/certifications/power-platform-solution-architect-expert/",
+      "code": "PL-600"
+    },
+    {
+      "name": "Microsoft Certified: Security Operations Analyst Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/security-operations-analyst/",
+      "code": "SC-200"
+    },
+    {
+      "name": "Microsoft Certified: Security, Compliance, and Identity Fundamentals",
+      "link": "https://learn.microsoft.com/en-us/certifications/security-compliance-and-identity-fundamentals/",
+      "code": "SC-900"
+    },
+    {
+      "name": "Microsoft Certified: Windows Server Hybrid Administrator Associate",
+      "link": "https://learn.microsoft.com/en-us/certifications/windows-server-hybrid-administrator/",
+      "code": "AZ-800, AZ-801"
+    },
+    {
+      "name": "Microsoft Office Specialist 2013 Master",
+      "link": "https://learn.microsoft.com/en-us/certifications/microsoft-office-specialist-master-certification-2013/",
+      "code": "77-420, 77-425, 77-426"
+    },
+    {
+      "name": "Microsoft Office Specialist: 2016 Master",
+      "link": "https://learn.microsoft.com/en-us/certifications/microsoft-office-specialist-master-certification-2016/",
+      "code": "77-726, 77-728, 77-729"
+    },
+    {
+      "name": "Microsoft Office Specialist: Access (Office 2016)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-access-2016/",
+      "code": "77-730"
+    },
+    {
+      "name": "Microsoft Office Specialist: Access 2013",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-access-2013/",
+      "code": "77-424"
+    },
+    {
+      "name": "Microsoft Office Specialist: Associate (Microsoft 365 Apps)",
+      "link": "https://learn.microsoft.com/en-us/certifications/microsoft-office-specialist-associate-m365-apps/",
+      "code": "MO-110, MO-210, MO-310"
+    },
+    {
+      "name": "Microsoft Office Specialist: Associate (Office 2019)",
+      "link": "https://learn.microsoft.com/en-us/certifications/microsoft-office-specialist-associate-2019/",
+      "code": "MO-100, MO-200, MO-300"
+    },
+    {
+      "name": "Microsoft Office Specialist: Excel (Office 2016)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-excel-2016/",
+      "code": "77-727"
+    },
+    {
+      "name": "Microsoft Office Specialist: Excel 2013",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-excel-2013/",
+      "code": "77-420"
+    },
+    {
+      "name": "Microsoft Office Specialist: Excel 2013 Expert",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-excel-2013-expert/",
+      "code": "77-427, 77-428"
+    },
+    {
+      "name": "Microsoft Office Specialist: Excel Associate (Microsoft 365 Apps)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-excel-associate-m365-apps/",
+      "code": "MO-210"
+    },
+    {
+      "name": "Microsoft Office Specialist: Excel Associate (Office 2019)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-excel-2019/",
+      "code": "MO-200"
+    },
+    {
+      "name": "Microsoft Office Specialist: Excel Expert (Microsoft 365 Apps)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-excel-expert-m365-apps/",
+      "code": "MO-211"
+    },
+    {
+      "name": "Microsoft Office Specialist: Excel Expert (Office 2016)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-excel-2016-expert/",
+      "code": "77-728"
+    },
+    {
+      "name": "Microsoft Office Specialist: Expert (Microsoft 365 Apps)",
+      "link": "https://learn.microsoft.com/en-us/certifications/microsoft-office-specialist-expert-m365-apps/",
+      "code": "MO-211"
+    },
+    {
+      "name": "Microsoft Office Specialist: Expert (Office 2019)",
+      "link": "https://learn.microsoft.com/en-us/certifications/microsoft-office-specialist-expert-2019/",
+      "code": "MO-101, MO-201, MO-500"
+    },
+    {
+      "name": "Microsoft Office Specialist: Microsoft Access Expert (Office 2019)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-access-expert-2019/",
+      "code": "MO-500"
+    },
+    {
+      "name": "Microsoft Office Specialist: Microsoft Excel Expert (Office 2019)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-excel-expert-2019/",
+      "code": "MO-201"
+    },
+    {
+      "name": "Microsoft Office Specialist: Microsoft Word Expert (Office 2019)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-word-expert-2019/",
+      "code": "MO-101"
+    },
+    {
+      "name": "Microsoft Office Specialist: OneNote 2013",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-onenote-2013/",
+      "code": "77-421"
+    },
+    {
+      "name": "Microsoft Office Specialist: Outlook (Office 2016)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-outlook-2016/",
+      "code": "77-731"
+    },
+    {
+      "name": "Microsoft Office Specialist: Outlook 2013",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-outlook-2013/",
+      "code": "77-423"
+    },
+    {
+      "name": "Microsoft Office Specialist: Outlook Associate (Office 2019)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-outlook-2019/",
+      "code": "MO-400"
+    },
+    {
+      "name": "Microsoft Office Specialist: PowerPoint (Office 2016)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-powerpoint-2016/",
+      "code": "77-729"
+    },
+    {
+      "name": "Microsoft Office Specialist: PowerPoint 2013",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-powerpoint-2013/",
+      "code": "77-422"
+    },
+    {
+      "name": "Microsoft Office Specialist: PowerPoint Associate (Microsoft 365 Apps)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-powerpoint-associate-m365-apps/",
+      "code": "MO-310"
+    },
+    {
+      "name": "Microsoft Office Specialist: PowerPoint Associate (Office 2019)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-powerpoint-2019/",
+      "code": "MO-300"
+    },
+    {
+      "name": "Microsoft Office Specialist: Word (Office 2016)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-word-2016/",
+      "code": "77-725"
+    },
+    {
+      "name": "Microsoft Office Specialist: Word 2013",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-word-2013/",
+      "code": "77-418"
+    },
+    {
+      "name": "Microsoft Office Specialist: Word 2013 Expert",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-word-2013-expert/",
+      "code": "77-425, 77-426"
+    },
+    {
+      "name": "Microsoft Office Specialist: Word Associate (Microsoft 365 Apps)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-word-associate-m365-apps/",
+      "code": "MO-110"
+    },
+    {
+      "name": "Microsoft Office Specialist: Word Associate (Office 2019)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-word-2019/",
+      "code": "MO-100"
+    },
+    {
+      "name": "Microsoft Office Specialist: Word Expert (Office 2016)",
+      "link": "https://learn.microsoft.com/en-us/certifications/mos-word-2016-expert/",
+      "code": "77-726"
+    }
+  ]
+}

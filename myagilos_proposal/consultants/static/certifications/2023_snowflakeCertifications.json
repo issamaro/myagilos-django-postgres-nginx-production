@@ -1,0 +1,50 @@
+{
+  "company": "SNOWFLAKE",
+  "certifications": [
+    {
+      "name": "SnowPro Core Certification",
+      "link": "https://learn.snowflake.com/en/certifications/snowpro-core/",
+      "code": "COF-C02"
+    },
+    {
+      "name": "SnowPro Advanced Architect",
+      "link": "https://learn.snowflake.com/en/certifications/snowpro-advanced-architect/",
+      "code": "ARA-C01"
+    },
+    {
+      "name": "SnowPro Advanced Data Engineer",
+      "link": "https://learn.snowflake.com/en/certifications/snowpro-advanced-dataengineer/",
+      "code": "DEA-C01"
+    },
+    {
+      "name": "SnowPro Advanced Data Scientist",
+      "link": "https://learn.snowflake.com/en/certifications/snowpro-advanced-datascientist/",
+      "code": "DSA-C01 & DSA-C02"
+    },
+    {
+      "name": "SnowPro Advanced Administrator",
+      "link": "https://learn.snowflake.com/en/certifications/snowpro-advanced-administrator/",
+      "code": "ADA-C01"
+    },
+    {
+      "name": "SnowPro Advanced Data Analyst",
+      "link": "https://learn.snowflake.com/en/certifications/snowpro-advanced-dataanalyst/",
+      "code": "DAA-C01"
+    },
+    {
+      "name": "SnowPro Core Recertification",
+      "link": "https://learn.snowflake.com/en/certifications/snowpro-core-recertification/",
+      "code": "COF-R02"
+    },
+    {
+      "name": "SnowPro Advanced Architect Recertification",
+      "link": "https://learn.snowflake.com/en/certifications/snowpro-advanced-architectrecertification/",
+      "code": "ARA-R01"
+    },
+    {
+      "name": "SnowPro Advanced Data Engineer Recertification",
+      "link": "https://learn.snowflake.com/en/certifications/snowpro-advanced-dataengineerrecertification/",
+      "code": "DEA-R01"
+    }
+  ]
+}

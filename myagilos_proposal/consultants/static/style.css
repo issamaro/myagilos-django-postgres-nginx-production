@@ -1,0 +1,626 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist&display=swap");
+form#reset-password-form div#container div#fields div.field:not(#login-submit) input, form#forgotten-password-form div#container div#fields div.field:not(#login-submit) input, form#login-form div#login-container div#fields div.field:not(#login-submit) input, form#reference-case-form div div textarea, form#reference-case-form div div input,
+form#reference-case-form div div select {
+  font-family: "Urbanist", "Helvetica neue", sans-serif;
+  font-size: 20px;
+  min-height: 36px;
+  height: 36px;
+  border: none;
+  border-bottom: 2px solid #555555;
+  width: 100%;
+}
+
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.nothing-to-show-parent div.nothing-to-show button, form#reset-password-form div#container div#submit input[type=submit], form#forgotten-password-form div#container div#submit input[type=submit], form#login-form div#login-container div#login-submit input[type=submit], form#reference-case-form div button#process-button, form#reference-case-form div input[disabled], form#reference-case-form div input[type=submit] {
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 500;
+  width: 90px;
+  height: 36px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  letter-spacing: 0.8px;
+}
+
+body {
+  font-family: "Urbanist", "Helvetica neue", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+::placeholder {
+  color: #696969;
+  font-size: 20px;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+p.error {
+  background-color: #FF4545 !important;
+  color: white !important;
+  font-family: "Urbanist", "Helvetica neue", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  margin-top: 10px !important;
+  padding: 2px 7px !important;
+}
+
+p.good {
+  background-color: #2CE3A0 !important;
+  color: white !important;
+  font-family: "Urbanist", "Helvetica neue", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  margin-top: 10px !important;
+  padding: 2px 7px !important;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #00A67E;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+  margin-top: auto;
+  margin-bottom: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.svg-white {
+  color: white;
+}
+
+.svg-blue {
+  color: #3756F5;
+}
+
+.svg-green {
+  color: #2CE3A0;
+}
+
+/*     MAIN CONTENT     */
+#side-container {
+  display: grid;
+  grid-template: auto/300px 6fr;
+}
+#side-container div.header {
+  position: relative;
+}
+#side-container header {
+  display: grid;
+  grid-template: 1fr 1fr 1.5fr 1.5fr 5fr/auto;
+  align-content: space-between;
+  height: 100dvh;
+  width: 100%;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  box-shadow: 0px 0px 6px rgb(216, 216, 216);
+}
+#side-container header div.header-greetings {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 10px 0;
+  margin-bottom: 50px;
+  display: grid;
+  grid-template-rows: auto auto;
+}
+#side-container header div.header-greetings span {
+  padding: 0 10px;
+}
+#side-container header div.header-greetings span#greetings-hello {
+  font-weight: 700;
+  font-size: 26px;
+}
+#side-container header div.header-greetings span#greetings-firstname {
+  display: block;
+  font-weight: 700;
+  font-size: 30px;
+  color: #3756F5;
+}
+#side-container header p.header-subtitle {
+  display: block;
+  width: 100%;
+  margin-bottom: 4px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #888888;
+  border-bottom: 2px solid #999999;
+}
+#side-container header a {
+  display: block;
+  width: 100%;
+  padding: 2px 0;
+  font-size: 20px;
+  font-weight: 500;
+}
+#side-container header a#header-home-title {
+  font-size: 30px;
+  font-weight: 500;
+}
+#side-container header a.header-cases-links:hover {
+  background-color: #c6e8ff;
+  padding: 2px 0 2px 4px;
+  border-radius: 4px;
+}
+#side-container header a.header-certifications-links:hover {
+  background-color: rgba(122, 255, 175, 0.4196078431);
+  padding: 2px 0 2px 4px;
+  border-radius: 4px;
+}
+#side-container header div.header-logout {
+  align-self: flex-start;
+  margin-top: 20px;
+}
+#side-container header div.header-endstuffs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+#side-container header button#logout {
+  border: none;
+  width: 90px;
+  height: 36px;
+  background: #FF4545;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#side-container header button#logout a {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+form#reference-case-form {
+  margin: 0;
+  padding: 50px 200px 50px 100px;
+  display: grid;
+  grid-template-columns: auto;
+  row-gap: 40px;
+}
+form#reference-case-form div.parts {
+  display: grid;
+  row-gap: 30px;
+}
+form#reference-case-form div.parts .div-field {
+  display: grid;
+  row-gap: 10px;
+}
+form#reference-case-form div.parts .div-field div.label-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 20px;
+}
+form#reference-case-form div.hide {
+  display: none;
+}
+form#reference-case-form p.subtitles {
+  font-size: 26px;
+  grid-column: 1/-1;
+}
+form#reference-case-form div:not(.introduction-part) {
+  grid-template-columns: auto;
+}
+form#reference-case-form div.introduction-part {
+  grid-template-columns: auto auto;
+  column-gap: 100px;
+}
+form#reference-case-form div.submit-part {
+  grid-template-columns: auto auto auto 1fr;
+  justify-items: start;
+  column-gap: 20px;
+}
+form#reference-case-form div div label {
+  font-size: 22px;
+  margin-left: 5px;
+}
+form#reference-case-form div div input,
+form#reference-case-form div div select {
+  margin: 10px 0 10px 20px;
+}
+form#reference-case-form div div textarea {
+  margin: 10px 0 10px 20px;
+  resize: vertical;
+}
+form#reference-case-form div input[type=submit] {
+  color: white;
+  background-color: #3756F5;
+}
+form#reference-case-form div input[disabled] {
+  background-color: #9d9d9d;
+  color: white;
+  cursor: default;
+}
+form#reference-case-form div button#process-button {
+  background-color: #00A67E;
+  color: white;
+  cursor: pointer;
+  margin: 10px 0 10px 20px;
+  width: 140px;
+}
+
+div#horizontal-container {
+  display: grid;
+  grid-template-rows: 90px calc(100dvh - 90px);
+  row-gap: 0;
+}
+div#horizontal-container header {
+  box-shadow: 0px 0px 6px rgb(216, 216, 216);
+  position: sticky;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 1000;
+  background-color: white;
+}
+div#horizontal-container main {
+  display: grid;
+}
+div#horizontal-container main div.wrapper {
+  align-self: center;
+  margin-bottom: 140px;
+}
+div#horizontal-container .wrapper {
+  margin: 0 auto;
+  width: 1300px;
+}
+
+form#login-form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+form#login-form div#login-container {
+  width: 600px;
+  height: 500px;
+  background-color: #3756F5;
+  border-radius: 8px;
+  color: white;
+  display: grid;
+  padding: 50px;
+  grid-template-rows: 4fr 3fr 2fr 1fr;
+}
+form#login-form div#login-container p#title {
+  font-size: 90px;
+  font-weight: 700;
+  margin: auto;
+}
+form#login-form div#login-container div#fields {
+  display: grid;
+  row-gap: 10px;
+}
+form#login-form div#login-container div#fields div.field:not(#login-submit) {
+  display: grid;
+  row-gap: 2px;
+}
+form#login-form div#login-container div#fields div.field:not(#login-submit) label {
+  font-size: 18px;
+}
+form#login-form div#login-container div#fields div.field:not(#login-submit) input {
+  padding-left: 10px;
+  border: none;
+  border-radius: 8px;
+}
+form#login-form div#login-container div#fields div.field:not(#login-submit) input:focus {
+  outline: 4px solid #2CE3A0;
+}
+form#login-form div#login-container div#login-submit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+form#login-form div#login-container div#login-submit input[type=submit] {
+  background-color: #2CE3A0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  height: 40px;
+  width: 160px;
+}
+form#login-form div#login-container div#forgot-password {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: end;
+}
+
+form#forgotten-password-form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+form#forgotten-password-form div#container {
+  width: 600px;
+  height: 600px;
+  background-color: #3756F5;
+  border-radius: 8px;
+  color: white;
+  display: grid;
+  padding: 50px;
+  grid-template-rows: 4fr 3fr 2fr;
+  row-gap: 10px;
+}
+form#forgotten-password-form div#container p#title {
+  font-size: 90px;
+  font-weight: 700;
+  margin: auto;
+  text-align: center;
+}
+form#forgotten-password-form div#container div#headline {
+  display: grid;
+  grid-template-rows: auto auto;
+}
+form#forgotten-password-form div#container div#fields {
+  display: grid;
+  row-gap: 10px;
+}
+form#forgotten-password-form div#container div#fields div.field:not(#login-submit) {
+  display: grid;
+  row-gap: 2px;
+}
+form#forgotten-password-form div#container div#fields div.field:not(#login-submit) label {
+  font-size: 18px;
+}
+form#forgotten-password-form div#container div#fields div.field:not(#login-submit) input {
+  padding-left: 10px;
+  border: none;
+  border-radius: 8px;
+}
+form#forgotten-password-form div#container div#fields div.field:not(#login-submit) input:focus {
+  outline: 4px solid #2CE3A0;
+}
+form#forgotten-password-form div#container div#submit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+form#forgotten-password-form div#container div#submit input[type=submit] {
+  background-color: #2CE3A0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  height: 40px;
+  width: 160px;
+}
+
+form#reset-password-form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+form#reset-password-form div#container {
+  width: 600px;
+  height: 600px;
+  background-color: #3756F5;
+  border-radius: 8px;
+  color: white;
+  display: grid;
+  padding: 50px;
+  grid-template-rows: 4fr 3fr 2fr;
+  row-gap: 10px;
+}
+form#reset-password-form div#container p#title {
+  font-size: 90px;
+  font-weight: 700;
+  margin: auto;
+  text-align: center;
+}
+form#reset-password-form div#container div#headline {
+  display: grid;
+  grid-template-rows: auto auto;
+}
+form#reset-password-form div#container div#fields {
+  display: grid;
+  row-gap: 10px;
+}
+form#reset-password-form div#container div#fields div.field:not(#login-submit) {
+  display: grid;
+  row-gap: 2px;
+}
+form#reset-password-form div#container div#fields div.field:not(#login-submit) label {
+  font-size: 18px;
+}
+form#reset-password-form div#container div#fields div.field:not(#login-submit) input {
+  padding-left: 10px;
+  border: none;
+  border-radius: 8px;
+}
+form#reset-password-form div#container div#fields div.field:not(#login-submit) input:focus {
+  outline: 4px solid #2CE3A0;
+}
+form#reset-password-form div#container div#submit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+form#reset-password-form div#container div#submit input[type=submit] {
+  background-color: #2CE3A0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  height: 40px;
+  width: 160px;
+}
+
+div#mycases-container {
+  display: grid;
+  grid-template-rows: auto auto;
+  position: relative;
+  padding: 50px 200px 50px 100px;
+  row-gap: 40px;
+}
+div#mycases-container p#mycases-headline {
+  font-size: 30px;
+}
+div#mycases-container div#mycases-content {
+  margin-left: 20px;
+  display: grid;
+  grid-template-rows: auto auto;
+  row-gap: 50px;
+}
+div#mycases-container div#mycases-content div#mycases-overview {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+}
+div#mycases-container div#mycases-content div#mycases-overview div.block {
+  display: grid;
+  grid-template-rows: auto auto;
+  row-gap: 28px;
+}
+div#mycases-container div#mycases-content div#mycases-overview div.block p.mycases-subheadline {
+  font-size: 26px;
+  font-weight: 600;
+}
+div#mycases-container div#mycases-content div#mycases-overview div.block div.case-component {
+  display: flex;
+  justify-content: flex-start;
+}
+div#mycases-container div#mycases-content div#mycases-overview div.block div.case-component div.case-icon {
+  background-color: #3756F5;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+div#mycases-container div#mycases-content div#mycases-overview div.block div.case-component div.case-data {
+  margin-left: 10px;
+  padding: 6px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+div#mycases-container div#mycases-content div#mycases-overview div.block div.case-component div.case-data p {
+  font-size: 20px;
+}
+div#mycases-container div#mycases-content div#mycases-overview div.block div.case-component div.case-data p:nth-child(1):not(#mycases-target) {
+  font-size: 24px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 500;
+}
+div#mycases-container div#mycases-content div#mycases-overview div.block div.case-component div.case-data p#mycases-target {
+  font-size: 60px;
+  margin: auto 0 auto 40px;
+}
+div#mycases-container div#mycases-content div#allcases {
+  display: grid;
+  row-gap: 10px;
+}
+div#mycases-container div#mycases-content div#allcases p#mycases-all-headline {
+  font-size: 26px;
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  row-gap: 28px;
+  margin-bottom: 20px;
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.mycases-case {
+  display: flex;
+  justify-content: flex-start;
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.mycases-case div.case-icon {
+  background-color: #3756F5;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.mycases-case div.case-data {
+  padding: 6px 0;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.mycases-case div.case-data p {
+  font-size: 20px;
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.mycases-case div.case-data p:nth-child(1) {
+  font-size: 24px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 500;
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.nothing-to-show-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1/-1;
+  margin-right: 130px;
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.nothing-to-show-parent div.nothing-to-show {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Helvetica neue", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.nothing-to-show-parent div.nothing-to-show p {
+  margin-bottom: 10px;
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.nothing-to-show-parent div.nothing-to-show strong {
+  color: #FF4545;
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.nothing-to-show-parent div.nothing-to-show button {
+  width: 160px;
+  background-color: #3756F5;
+}
+div#mycases-container div#mycases-content div#allcases div[id$=-group] div.nothing-to-show-parent div.nothing-to-show button a {
+  color: white;
+}
+div#mycases-container div#mycases-content div#allcases p.mycases-year {
+  grid-column: 1/-1;
+  border-bottom: 2px solid #696969;
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 60px;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,9 @@
+Hello {first_name},                              
+
+Here is the link you will need in order to reset your password in MyAgilos:
+{reset_url}
+                              
+If you are not the one who made this request, please, ignore this email.
+                              
+Sincerely,
+The Agilos Team

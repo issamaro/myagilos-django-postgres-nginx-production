@@ -1,0 +1,65 @@
+{
+  "company": "AWS",
+  "certifications": [
+    {
+      "name": "AWS Certified Cloud Practitioner",
+      "link": "https://aws.amazon.com/fr/certification/certified-cloud-practitioner/?ch=tile&tile=getstarted",
+      "code": "AWCeClPr"
+    },
+    {
+      "name": "AWS Certified Solutions Architect - Associate",
+      "link": "https://aws.amazon.com/fr/certification/certified-solutions-architect-associate/?ch=tile&tile=getstarted",
+      "code": "AWCeSoAr-As"
+    },
+    {
+      "name": "AWS Certified SysOps Administrator - Associate",
+      "link": "https://aws.amazon.com/fr/certification/certified-sysops-admin-associate/?ch=tile&tile=getstarted",
+      "code": "AWCeSyAd-As"
+    },
+    {
+      "name": "AWS Certified Developer - Associate",
+      "link": "https://aws.amazon.com/fr/certification/certified-developer-associate/?ch=tile&tile=getstarted",
+      "code": "AWCeDe-As"
+    },
+    {
+      "name": "AWS Certified Solutions Architect - Professional",
+      "link": "https://aws.amazon.com/fr/certification/certified-solutions-architect-professional/?ch=tile&tile=getstarted",
+      "code": "AWCeSoAr-Pr"
+    },
+    {
+      "name": "AWS Certified DevOps Engineer - Professional",
+      "link": "https://aws.amazon.com/fr/certification/certified-devops-engineer-professional/?ch=tile&tile=getstarted",
+      "code": "AWCeDeEn-Pr"
+    },
+    {
+      "name": "AWS Certified Advanced Networking - Specialty",
+      "link": "https://aws.amazon.com/fr/certification/certified-advanced-networking-specialty/?ch=tile&tile=getstarted",
+      "code": "AWCeAdNe-Sp"
+    },
+    {
+      "name": "AWS Certified Data Analytics - Specialty",
+      "link": "https://aws.amazon.com/fr/certification/certified-data-analytics-specialty/?ch=tile&tile=getstarted",
+      "code": "AWCeDaAn-Sp"
+    },
+    {
+      "name": "AWS Certified Database - Specialty",
+      "link": "https://aws.amazon.com/fr/certification/certified-database-specialty/?ch=tile&tile=getstarted",
+      "code": "AWCeDa-Sp"
+    },
+    {
+      "name": "AWS Certified Machine Learning - Specialty",
+      "link": "https://aws.amazon.com/fr/certification/certified-machine-learning-specialty/?ch=tile&tile=getstarted",
+      "code": "AWCeMaLe-Sp"
+    },
+    {
+      "name": "AWS Certified Security - Specialty",
+      "link": "https://aws.amazon.com/fr/certification/certified-security-specialty/?ch=tile&tile=getstarted",
+      "code": "AWCeSe-Sp"
+    },
+    {
+      "name": "AWS Certified: SAP on AWS - Specialty",
+      "link": "https://aws.amazon.com/fr/certification/certified-sap-on-aws-specialty/?ch=tile&tile=getstarted",
+      "code": "AWCeSAonAW-Sp"
+    }
+  ]
+}
