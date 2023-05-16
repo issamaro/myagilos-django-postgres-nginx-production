@@ -82,8 +82,8 @@ class Consultant_certifications(models.Model):
     certification = models.ForeignKey(
         "Certifications", on_delete=models.CASCADE)
     earned_at = models.DateField()
-    expires_at = models.DateField()
-    certification_idcode = models.CharField(max_length=128)
+    expires_at = models.DateField(null=True, blank=True)
+    certification_idcode = models.CharField(max_length=128, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

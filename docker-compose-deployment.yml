@@ -1,5 +1,15 @@
 version: "3.9"
 services:
+  db:
+    image: postgres:15.3-alpine
+    container_name: myagilos-postgresql
+    environment:
+      - POSTGRES_DB=devdb
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=changeme
+    restart: always
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
   myagilos:
     image: myagilos:1.0.0
     container_name: myagilos
@@ -10,6 +20,12 @@ services:
     environment:
       - SECRET_KEY=samplesecretkey123
       - ALLOWED_HOSTS=127.0.0.1,localhost
+      - DB_HOST=db
+      - DB_NAME=devdb
+      - DB_USER=devuser
+      - DB_PASS=changeme
+    depends_on:
+      - db
   
   proxy:
     image: myagilos-proxy:1.0.0
@@ -22,6 +38,6 @@ services:
       - 8080:8080
     depends_on:
       - myagilos
-  
 volumes:
   static_data:
+  postgresql_data:
