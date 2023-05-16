@@ -23,14 +23,32 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "changeme")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(int(os.environ.get("DEBUG", 1)))
-
-ALLOWED_HOSTS = []
-ALLOWED_HOSTS_ENV = os.environ.get("ALLOWED_HOSTS")
-if ALLOWED_HOSTS_ENV:
-    ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(","))
+DEBUG = bool(int(os.environ.get("DEBUG", 0)))
 
 
+if ALLOWED_HOSTS_ENV := os.environ.get("ALLOWED_HOSTS", None):
+    ALLOWED_HOSTS = [host.strip().lower() for host in ALLOWED_HOSTS_ENV.split(",")]
+else:
+    ALLOWED_HOSTS = []
+
+# HTTPS SETTINGS
+if bool(int(os.environ.get("HTTPS_ON", False))):
+    SESSION_COOKIE_SECURE = bool(int(os.environ.get("SESSION_COOKIE_SECURE", 0)))
+    CSRF_COOKIE_SECURE = bool(int(os.environ.get("CSRF_COOKIE_SECURE", 0)))
+    SECURE_SSL_REDIRECT = bool(int(os.environ.get("SECURE_SSL_REDIRECT", 0)))
+else:
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_SSL_REDIRECT = False
+# HSTS SETTINGS
+if bool(int(os.environ.get("HSTS_ON", False))):
+    SECURE_HSTS_SECONDS = int(os.environ.get("SECURE_HSTS_SECONDS", 0))
+    SECURE_HSTS_PRELOAD = bool(int(os.environ.get("SECURE_HSTS_PRELOAD", 0)))
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = bool(int(os.environ.get("SECURE_HSTS_INCLUDE_SUBDOMAINS", 0)))
+else:
+    SECURE_HSTS_SECONDS = 0
+    SECURE_HSTS_PRELOAD = False
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 # Application definition
 
 INSTALLED_APPS = [

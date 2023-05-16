@@ -4,12 +4,12 @@ services:
     image: postgres:15.3-alpine
     container_name: myagilos-postgresql
     environment:
-      - POSTGRES_DB=devdb
-      - POSTGRES_USER=devuser
-      - POSTGRES_PASSWORD=changeme
-    restart: always
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
     volumes:
       - postgresql_data:/var/lib/postgresql/data
+    restart: always
   myagilos:
     image: myagilos:1.0.0
     container_name: myagilos
@@ -18,15 +18,26 @@ services:
     volumes:
       - static_data:/vol/web
     environment:
-      - SECRET_KEY=samplesecretkey123
-      - ALLOWED_HOSTS=127.0.0.1,localhost
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
       - DB_HOST=db
-      - DB_NAME=devdb
-      - DB_USER=devuser
-      - DB_PASS=changeme
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - SECRET_KEY=${SECRET_KEY}
+      - HTTPS_ON=${HTTPS_ON}
+      - SESSION_COOKIE_SECURE=${SESSION_COOKIE_SECURE}
+      - CSRF_COOKIE_SECURE=${CSRF_COOKIE_SECURE}
+      - SECURE_SSL_REDIRECT=${SECURE_SSL_REDIRECT}
+      - HSTS_ON=${HSTS_ON}
+      - SECURE_HSTS_SECONDS=${SECURE_HSTS_SECONDS}
+      - SECURE_HSTS_PRELOAD=${SECURE_HSTS_PRELOAD}
+      - SECURE_HSTS_INCLUDE_SUBDOMAINS=${SECURE_HSTS_INCLUDE_SUBDOMAINS}
+      - MAIL_SENDER=${MAIL_SENDER}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
     depends_on:
       - db
-  
+    restart: always
+
   proxy:
     image: myagilos-proxy:1.0.0
     container_name: myagilos-proxy
@@ -35,9 +46,11 @@ services:
     volumes:
       - static_data:/vol/static
     ports:
-      - 8080:8080
+      - 80:8000
     depends_on:
       - myagilos
+    restart: always
+
 volumes:
   static_data:
   postgresql_data:

@@ -10,6 +10,7 @@ from .forms import AddCertificationForm, CasesForm, ForgotPasswordForm, ResetPas
 from .models import Cases, Consultants, ForgotPassword, User
 from .emailz import *
 import hashlib
+import os
 import secrets
 
 # ----------GLOBAL TEMPLATES----------
@@ -24,6 +25,9 @@ SENDCASE_TEMPLATE = "consultants/mains/sendcase.html"
 MYCASES_TEMPLATE = "consultants/mains/mycases.html"
 ADDCERTIFICATION_TEMPLATE = "consultants/mains/addcertification.html"
 MYCERTIFICATIONS_TEMPLATE = "consultants/mains/mycertifications.html"
+# ----------GLOBAL VARIABLES----------
+MAIL_SENDER = os.environ.get("MAIL_SENDER")
+MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
 
 # ----------FAVICON----------
@@ -98,7 +102,8 @@ def forgot_password(request):
                 # ENCRYPTION
                 salt = secrets.token_hex(16)
                 secret_token = secrets.token_urlsafe(64)
-                hashed_token = hashlib.pbkdf2_hmac('sha256', secret_token.encode('utf-8'), salt.encode('utf-8'), 100000)
+                hashed_token = hashlib.pbkdf2_hmac(
+                    'sha256', secret_token.encode('utf-8'), salt.encode('utf-8'), 100000)
                 # FORGOT_CASE CREATION
                 ForgotPassword.objects.create(
                     username=username,
@@ -111,14 +116,17 @@ def forgot_password(request):
                 with open(RESET_EMAIL_TXT, "r") as emailf:
                     body = f"{emailf.read()}".format(
                         first_name=user.first_name, reset_url=reset_url)
-                sendemail(
-                    sender="aca@agilos.com",
-                    password="Agilos123",
-                    receiver=email,
-                    subject=f"{user.first_name}, reset your password",
-                    body=body
-                )
-                return HttpResponse(f"Email sent to {email}.")
+                if MAIL_SENDER and MAIL_PASSWORD:
+                    sendemail(
+                        sender=MAIL_SENDER,
+                        password=MAIL_PASSWORD,
+                        receiver=email,
+                        subject=f"{user.first_name}, reset your password",
+                        body=body
+                    )
+                    return HttpResponse(f"Email sent to {email}.")
+                else:
+                    return HttpResponse("Email not sent: automated mailbox configuration error. Please, contact the IT Support.")
         else:
             return render(request, FORGOT_PASSWORD_TEMPLATE, {
                 "form": form
@@ -139,7 +147,8 @@ def reset_password(request, token):
             password = form.cleaned_data["password"]
             current_time = timezone.now()
             try:
-                forgot_case = ForgotPassword.objects.get(username=username, active=True, expires_at__gt=current_time)
+                forgot_case = ForgotPassword.objects.get(
+                    username=username, active=True, expires_at__gt=current_time)
             except ForgotPassword.DoesNotExist:
                 return render(request, RESET_PASSWORD_TEMPLATE, {
                     "form": form,
@@ -148,25 +157,27 @@ def reset_password(request, token):
                 })
             else:
                 salt, hashed_token = forgot_case.salt_and_hash.split(":")
-                token_checker = hashlib.pbkdf2_hmac('sha256', token.encode('utf-8'), salt.encode('utf-8'), 100000)
+                token_checker = hashlib.pbkdf2_hmac(
+                    'sha256', token.encode('utf-8'), salt.encode('utf-8'), 100000)
                 if token_checker.hex() == hashed_token:
                     # SET NEW PASSWORD
                     user = User.objects.get(username=username)
                     user.set_password(password)
                     user.save()
-                    
-                    
+
                     ForgotPassword.objects.filter(
                         salt_and_hash=forgot_case.salt_and_hash).update(active=False)
                     with open(RESET_CONFIRMATION_EMAIL_TXT, "r") as emailf:
-                        emailbody = f"{emailf.read()}".format(first_name=user.first_name)
-                    sendemail(
-                        sender="aca@agilos.com",
-                        password="Agilos123",
-                        receiver=user.email,
-                        subject=f"{user.first_name}, your password has been reset.",
-                        body=emailbody
-                    )
+                        emailbody = f"{emailf.read()}".format(
+                            first_name=user.first_name)
+                    if MAIL_SENDER and MAIL_PASSWORD:
+                        sendemail(
+                            sender=MAIL_SENDER,
+                            password=MAIL_PASSWORD,
+                            receiver=user.email,
+                            subject=f"{user.first_name}, your password has been reset.",
+                            body=emailbody
+                        )
                     return render(request, LOGIN_TEMPLATE, {
                         "success": "Password successfully reset."
                     })
@@ -215,10 +226,13 @@ def sendcase(request):
 @login_required
 def mycases(request):
     if request.method == "GET":
-        consultant = Consultants.objects.get(user__username=request.user.username)
-        consultant_cases = Cases.objects.filter(author=consultant) # WARNING: IT IS A QUERYSET IN ORDER TO ITERATE OVER IT.
+        consultant = Consultants.objects.get(
+            user__username=request.user.username)
+        # WARNING: IT IS A QUERYSET IN ORDER TO ITERATE OVER IT.
+        consultant_cases = Cases.objects.filter(author=consultant)
         consultant_last_case = consultant_cases.order_by("-created_at").first()
-        consultant_current_year_cases_count = len(consultant_cases.filter(year=timezone.now().year))
+        consultant_current_year_cases_count = len(
+            consultant_cases.filter(year=timezone.now().year))
         years_desc = list(range(2023, timezone.now().year + 1))[::-1]
         years_desc_test = list(range(2021, timezone.now().year + 1))[::-1]
         current_year = timezone.now().year
@@ -245,5 +259,3 @@ def addcertification(request):
 def mycertifications(request):
     if request.method == "GET":
         return render(request, MYCERTIFICATIONS_TEMPLATE)
-
-
