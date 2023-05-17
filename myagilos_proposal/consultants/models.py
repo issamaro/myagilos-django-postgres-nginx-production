@@ -213,5 +213,5 @@ class ForgotPassword(models.Model):
     email = models.EmailField()
     salt_and_hash = models.CharField(max_length=128, unique=True, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    expires_at = models.DateTimeField(default=(timezone.now() + datetime.timedelta(minutes=60)))
+    expires_at = models.DateTimeField(default=timezone.now() + datetime.timedelta(minutes=60))
     active = models.BooleanField(default=True)
