@@ -16,7 +16,7 @@ class certificationsAdmin(admin.ModelAdmin):
 
 @admin.register(Certification_progress)
 class certification_progressAdmin(admin.ModelAdmin):
-    readonly_fields = [f.name for f in Certification_progress._meta.fields if f.name is not "id"]
+    readonly_fields = [f.name for f in Certification_progress._meta.fields if f.name != "id"]
     list_filter = ["target__certification__company"]
     
     
