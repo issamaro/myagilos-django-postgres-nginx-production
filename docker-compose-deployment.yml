@@ -10,6 +10,7 @@ services:
     volumes:
       - postgresql_data:/var/lib/postgresql/data
     restart: always
+
   myagilos:
     image: myagilos:1.0.0
     container_name: myagilos
