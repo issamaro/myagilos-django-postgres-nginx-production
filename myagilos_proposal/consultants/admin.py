@@ -8,7 +8,6 @@ from .models import Certification_targets
 from .models import Consultants
 from .models import Consultant_certifications
 
-
 # Register Certifications and Certification_progress models
 @admin.register(Certifications)
 class certificationsAdmin(admin.ModelAdmin):

@@ -1,11 +1,17 @@
 from bs4 import BeautifulSoup
-import json
 from datetime import date
+import json
+import os
 
-MICROSOFT_PATH = "https://learn.microsoft.com"
+COMPANY_PATH = "https://learn.microsoft.com"
+
 COMPANY = "microsoft"
+HTML_PATH = os.path.join(os.path.dirname(__file__), "html/")
+JSON_PATH = os.path.join(os.path.dirname(__file__), "../static/certifications")
+HTML_FILE = f"{HTML_PATH}/{COMPANY}_certifications.html"
+JSON_FILE = f"{JSON_PATH}/{date.today().year}_{COMPANY}Certifications.json"
 
-with open(f"{COMPANY}_certifications.html", "r") as rf, open(f"{date.today().year}_{COMPANY}Certifications.json", "w") as wf:
+with open(HTML_FILE, "r") as rf, open(JSON_FILE, "w") as wf:
     html = rf.read()
     soup = BeautifulSoup(html, "html.parser")
     divs = soup.find_all("div", class_="card-template")
@@ -14,7 +20,7 @@ with open(f"{COMPANY}_certifications.html", "r") as rf, open(f"{date.today().yea
         "certifications": [
             {
                 "name": " ".join(div.find("a", class_="card-title").text.split()),
-                "link": f"{MICROSOFT_PATH}{div.find('a', class_='card-title').get('href')}",
+                "link": f"{COMPANY_PATH}{div.find('a', class_='card-title').get('href')}",
                 "code": div.find("span", class_="is-comma-delimited").text.strip()
             }
             for div in divs

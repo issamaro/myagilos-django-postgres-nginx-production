@@ -2,6 +2,8 @@ import datetime
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
+import json
+from os import path
 
 
 def semester_num():
@@ -50,19 +52,47 @@ class Certifications(models.Model):
     """
     Model representing certifications.
     """
-    COMPANIES = [
-        ("Microsoft", "Microsoft"),
-        ("Snowflake", "Snowflake"),
-        ("Qlik", "Qlik")
-    ]
+    ALL_CERTIFICATIONS = path.join(path.dirname(
+        __file__), f"static/certifications/{timezone.now().year}_allCertifications_.json")
+    with open(ALL_CERTIFICATIONS, "r") as rf:
+        file = rf.read()
+        COMPANIES = [("---", "---")] + [
+            (company["company"], company["company"])
+            for company in json.loads(file)
+        ]
+        CERTIFICATIONS = [("---", "---")] + [
+            (certification["name"], certification["name"])
+            for company in json.loads(file)
+            for certification in company["certifications"]
+        ]
+
+        CODES = [("---", "---")] + [
+            (certification["code"], certification["code"])
+            for company in json.loads(file)
+            for certification in company["certifications"]
+        ]
+
+        CERTIFICATIONS_CODES = [
+            (f"{certification['code']} - {certification['name']}",
+             f"{certification['code']} - {certification['name']}")
+            for company in json.loads(file)
+            for certification in company["certifications"]
+        ]
+
     company = models.CharField(max_length=64, choices=COMPANIES)
-    title = models.CharField(max_length=254)
+    title = models.CharField(
+        max_length=254, choices=CERTIFICATIONS, unique=True)
+    code = models.CharField(
+        max_length=64, choices=CODES, unique=True, blank=True, null=True)
     consultants = models.ManyToManyField(
         "Consultants", through="Consultant_certifications", related_name="related_certifications")
 
     class Meta:
         verbose_name_plural = "Certifications"
-        unique_together = (("company", "title"),)
+        unique_together = (
+            ("company", "title"),
+            ("title", "code"),
+        )
 
     def __str__(self):
         """
@@ -82,8 +112,9 @@ class Consultant_certifications(models.Model):
     certification = models.ForeignKey(
         "Certifications", on_delete=models.CASCADE)
     earned_at = models.DateField()
-    expires_at = models.DateField(null=True, blank=True)
-    certification_idcode = models.CharField(max_length=128, null=True, blank=True)
+    expires_at = models.DateField(blank=True, null=True)
+    certification_idcode = models.CharField(
+        max_length=128, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -164,9 +195,11 @@ class Cases(models.Model):
         ("Construction", "Construction"),
         ("Education", "Education"),
         ("Energy", "Energy"),
-        ("Environmental Conservation and Sustainability", "Environmental Conservation and Sustainability"),
+        ("Environmental Conservation and Sustainability",
+         "Environmental Conservation and Sustainability"),
         ("Finance", "Finance"),
-        ("Government and Public Administration", "Government and Public Administration"),
+        ("Government and Public Administration",
+         "Government and Public Administration"),
         ("Health", "Health"),
         ("Hospitality", "Hospitality"),
         ("Insurance", "Insurance"),
@@ -210,8 +243,9 @@ class Cases(models.Model):
 
 class ForgotPassword(models.Model):
     username = models.CharField(max_length=60)
-    email = models.EmailField()
-    salt_and_hash = models.CharField(max_length=128, unique=True, blank=True, null=True)
+    email = models.EmailField(max_length=60)
+    salt_and_hash = models.CharField(max_length=128, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    expires_at = models.DateTimeField(default=timezone.now() + datetime.timedelta(minutes=60))
+    expires_at = models.DateTimeField(default=(
+        timezone.now() + datetime.timedelta(minutes=60)), null=True, blank=True)
     active = models.BooleanField(default=True)

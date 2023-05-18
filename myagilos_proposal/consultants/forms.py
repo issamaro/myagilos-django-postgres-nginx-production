@@ -15,6 +15,9 @@ class ForgotPasswordForm(ModelForm):
         self.fields["username"].widget.attrs.update({"placeholder": "Enter your username"})
         self.fields["email"].widget.attrs.update({"placeholder": "Enter your email"})
 
+class ResetPasswordForm(Form):
+    username = CharField(label="Username", max_length=64, widget=TextInput(attrs={"placeholder": "john.doe"}))
+    password = CharField(label="New Password", widget=PasswordInput(attrs={"placeholder": "New Password"}))
 
 class CasesForm(ModelForm):
     class Meta:
@@ -56,43 +59,35 @@ class CasesForm(ModelForm):
     
     industry = TypedChoiceField(choices=Cases.INDUSTRIES, widget=CustomSelect)
 
-
-class ResetPasswordForm(Form):
-    username = CharField(label="Username", max_length=64, widget=TextInput(attrs={'placeholder': 'john.doe'}))
-    password = CharField(label="New Password", widget=PasswordInput(attrs={'placeholder': 'New Password'}))
-
-
 class AddCertificationForm(Form):
-    # class Meta:
-    #     model = Consultant_certifications
-    #     fields = "__all__"
-
-# class ConsultantCertificationForm(Form):
-    company = CharField(max_length=64)
-    title = CharField(max_length=254)
-    earned_at = DateField()
-    expires_at = DateField()
-    certification_idcode = CharField(max_length=128)
+    company = TypedChoiceField(required=True, label="Company*", choices=Certifications.COMPANIES, widget=CustomSelect)
+    title = TypedChoiceField(required=True, label="Title*", choices=Certifications.CERTIFICATIONS_CODES, widget=CustomSelect)
+    earned_at = DateField(required=True, label="Date of issue*", widget=DateInput(attrs={"type": "date"}))
+    expires_at = DateField(required=False, label="Expiry date", widget=DateInput(attrs={"type": "date"}))
+    certification_idcode = CharField(required=False, label="Certification ID", max_length=128, widget=TextInput(attrs={"placeholder": "Enter the Unique Identifier attached to your certification"}))
     
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
+        self.request = kwargs.pop("request", None)
         super().__init__(*args, **kwargs)
     
     def save(self):
-        # Get or create certification
-        certification, created = Certifications.objects.get_or_create(
-            company=self.cleaned_data['company'],
-            title=self.cleaned_data['title']
-        )
-        
-        # Create consultant certification
-        consultant_certification = Consultant_certifications(
-            consultant=self.request.user.as_consultant,
-            certification=certification,
-            earned_at=self.cleaned_data['earned_at'],
-            expires_at=self.cleaned_data['expires_at'],
-            certification_idcode=self.cleaned_data['certification_idcode']
-        )
-        consultant_certification.save()
-
-
+        if self.request is None or not hasattr(self.request.user, 'as_consultant'):
+            raise ValueError("Invalid user or user does not have consultant profile.")
+        else:
+            code, title = self.cleaned_data["title"].split(" - ", 1)
+            # Get or create certification
+            certification, created = Certifications.objects.get_or_create(
+                company=self.cleaned_data["company"],
+                title=title,
+                code=code
+            )
+            
+            # Create consultant certification
+            consultant_certification = Consultant_certifications(
+                consultant=self.request.user.as_consultant,
+                certification=certification,
+                earned_at=self.cleaned_data["earned_at"],
+                expires_at=self.cleaned_data["expires_at"],
+                certification_idcode=self.cleaned_data["certification_idcode"]
+            )
+            consultant_certification.save()

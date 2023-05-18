@@ -28,28 +28,7 @@
     <main>
         {# FORM #}
         {% if form %}
-        {% with iconsize=26 %}
-            {% include "consultants/includes/sendcase_form.html" with icon_size=26 %}
-        {% endwith %}
-        {% comment %} <h1>Request</h1>
-        <ul>{% for key, value in request.session.items %}
-            <li>{{ key }}: {{ value }}</li>{% endfor %}
-            <li>{{ request.cookie }}</li>
-            <li>{{ request.user }}</li>
-            <li>{{ request.method }}</li>
-            <li>{{ request.content_type }}</li>
-            <li>{{ request.GET }}</li>
-            <li>{{ request.path }}</li>
-            <li>{{ request.post }}</li>
-            <li>{{ request.files }}</li>
-            <li>{{ request.META }}</li>
-            <li>{{ request.headers }}</li>
-            <li>{{ request.current_app }}</li>
-            <li>username: {{ request.user }}</li>
-            <li>is user authenticated? {{ request.user.is_authenticated }}</li>
-            <li>{{ request.site }}</li>
-            <li>is request secure? {{ request.is_secure }}</li>
-        </ul> {% endcomment %}
+        {% include "consultants/includes/sendcase_form.html" %}
         {% endif %}
     </main>
 {% endblock side_container %}

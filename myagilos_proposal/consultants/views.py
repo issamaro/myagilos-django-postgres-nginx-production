@@ -19,6 +19,7 @@ FORGOT_PASSWORD_TEMPLATE = "consultants/logs/forgot_password.html"
 RESET_PASSWORD_TEMPLATE = "consultants/logs/reset_password.html"
 RESET_EMAIL_TXT = "consultants/templates_files/reset_email.txt"
 RESET_CONFIRMATION_EMAIL_TXT = "consultants/templates_files/reset_email_confirm.txt"
+SUCCESS_MESSAGE = "Successfully sent. Thank you."
 
 HOME_TEMPLATE = "consultants/mains/home.html"
 SENDCASE_TEMPLATE = "consultants/mains/sendcase.html"
@@ -71,14 +72,12 @@ def login_view(request):
                 "helper_username": "Username: \"[firstname].[lastname]\""
             })
 
-
 @login_required
 def logout_view(request):
     logout(request)
     return render(request, LOGIN_TEMPLATE, {
         "logout": "Goodbye!"
     })
-
 
 def forgot_password(request):
     if request.method == "GET":
@@ -131,7 +130,6 @@ def forgot_password(request):
             return render(request, FORGOT_PASSWORD_TEMPLATE, {
                 "form": form
             })
-
 
 def reset_password(request, token):
     if request.method == "GET":
@@ -199,7 +197,6 @@ def reset_password(request, token):
 def home(request):
     return HttpResponse("hello")
 
-
 @login_required
 def sendcase(request):
     if request.method == "POST":
@@ -210,7 +207,7 @@ def sendcase(request):
             form.instance.author = user_as_consultant
             form.save()
             return render(request, HOME_TEMPLATE, {
-                "success": "Your case has been successfully sent. Thank you."
+                "success": SUCCESS_MESSAGE
             })
         else:
             return render(request, SENDCASE_TEMPLATE, {
@@ -222,17 +219,13 @@ def sendcase(request):
             "form": form
         })
 
-
 @login_required
 def mycases(request):
     if request.method == "GET":
-        consultant = Consultants.objects.get(
-            user__username=request.user.username)
-        # WARNING: IT IS A QUERYSET IN ORDER TO ITERATE OVER IT.
-        consultant_cases = Cases.objects.filter(author=consultant)
+        consultant = Consultants.objects.get(user__username=request.user.username)
+        consultant_cases = Cases.objects.filter(author=consultant) # WARNING: IT IS A QUERYSET IN ORDER TO ITERATE OVER IT.
         consultant_last_case = consultant_cases.order_by("-created_at").first()
-        consultant_current_year_cases_count = len(
-            consultant_cases.filter(year=timezone.now().year))
+        consultant_current_year_cases_count = len(consultant_cases.filter(year=timezone.now().year))
         years_desc = list(range(2023, timezone.now().year + 1))[::-1]
         years_desc_test = list(range(2021, timezone.now().year + 1))[::-1]
         current_year = timezone.now().year
@@ -244,7 +237,6 @@ def mycases(request):
             "current_year": current_year
         })
 
-
 @login_required
 def addcertification(request):
     if request.method == "GET":
@@ -253,9 +245,26 @@ def addcertification(request):
             "form": form
         })
     elif request.method == "POST":
-        pass
-
-
+        form = AddCertificationForm(request.POST, request=request)
+        if form.is_valid():
+            try:
+                form.save()
+            except ValueError as error:
+                return render(request, ADDCERTIFICATION_TEMPLATE, {
+                    "form": form,
+                    "error": error
+                })
+            else:
+                return render(request, HOME_TEMPLATE, {
+                    "form": form,
+                    "success": SUCCESS_MESSAGE
+                })
+        else:
+            return render(request, ADDCERTIFICATION_TEMPLATE, {
+                    "form": form
+                })
+            
+@login_required
 def mycertifications(request):
     if request.method == "GET":
         return render(request, MYCERTIFICATIONS_TEMPLATE)

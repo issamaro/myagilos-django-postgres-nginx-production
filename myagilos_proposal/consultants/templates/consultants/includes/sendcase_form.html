@@ -1,6 +1,9 @@
 {% load icon %}
 <form id="reference-case-form" method="POST">
     {% csrf_token %}
+        <div class="headertitle parts">
+            <p class="header">Send a case</p>
+        </div>
         <div class="introduction-part parts">
             <p class="subtitles">Introduction</p>
             <div class="div-field" id="div-company">
@@ -22,7 +25,7 @@
             <div class="div-field" id="div-start-date">
                 {{ form.project_start.errors }}
                 <div class="label-icons">
-                    {% icon "clock" class="svg-blue" height="26" width="26" %}
+                    {% icon "calendar" class="svg-blue" height="26" width="26" %}
                     {{ form.project_start.label_tag }}
                 </div>
                 {{ form.project_start }}
@@ -30,7 +33,7 @@
             <div class="div-field" id="div-end-date">
                 {{ form.project_end.errors }}
                 <div class="label-icons">
-                    {% icon "clock" class="svg-blue" height="26" width="26" %}
+                    {% icon "calendar" class="svg-blue" height="26" width="26" %}
                     {{ form.project_end.label_tag }}
                 </div>
                 {{ form.project_end }}

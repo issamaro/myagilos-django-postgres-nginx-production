@@ -1,0 +1,122 @@
+{% extends "consultants/layouts/base.html" %}
+{% load static %}
+{% load icon %}
+
+{# HEAD #}
+    {# Style #}
+    {% block style %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    {% endblock style %}
+
+    {# Javascript #}
+    {% block javascript %}
+    <script src="{% static "divs-sorting.js" %}"></script>
+    <script src="{% static "red-target.js" %}"></script>
+    <script src="{% static "dynamic-list.js" %}"></script>
+    
+    {% endblock javascript %}
+
+    {# Title #}
+    {% block page_title %}MyAgilos - My cases{% endblock page_title %}
+
+
+{# BODY #}
+    {% block side_container %}
+        {# HEADER #}
+        {% include "consultants/includes/sidebar.html" %}
+        {# MAIN #}
+        <main>
+            <div id="mycases-container">
+                <p id="mycases-headline">My cases</p>
+                <div id="mycases-content">
+                    <div id="mycases-overview">
+                        {# LEFT #}
+                        <div class="block" id="lastcase">
+                            {# HEADLINE #}
+                            <p class="mycases-subheadline" id="mylastcase-headline">My last case</p>
+                            {# COMPONENT (ICON+DATA) #}
+                            <div class="case-component" id="mylastcase-content">
+                                {# ICON #}
+                                <div class="case-icon">
+                                    {% icon "archive" class="svg-white" height="90" width="90" %}
+                                </div>
+                                {# DATA #}
+                                <div class="case-data">
+                                    {# LAST CASE #}
+                                    {% if last_case %}
+                                    <p>{{ last_case.company }}</p>
+                                    <p>Industry: {{ last_case.industry }}</p>
+                                    <p>{{ last_case.created_at|date:"d/m/Y" }}</p>
+                                    <p>Thank you for helping Agilos.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {# RIGHT #}
+                        <div class="block" id="current-year-cases-count">
+                            {# HEADLINE #}
+                            <p class="mycases-subheadline" id="cycc-headline">Target {% now "Y" %}</p>
+                            {# COMPONENT (ICON+DATA) #}
+                            <div class="case-component" id="cycc-content">
+                                {# ICON #}
+                                <div class="case-icon">
+                                    {% icon "archive" class="svg-white" height="90" width="90" %}
+                                </div>
+                                {# DATA #}
+                                <div class="case-data">
+                                    {# NUMBER OF CASES FROM CURRENT YEAR #}
+                                    {% if current_year_cases_count >= 0 %}
+                                    <p id="mycases-target">{{ current_year_cases_count }}/1</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="allcases">
+                        <p id="mycases-all-headline">All</p>
+                        {% if cases %}
+                            {% for year in years_desc %}
+                                {% for case in cases %}
+                                    {% if case.year == year %}
+                                        <div class="mycases-case" id="{{ case.year }}">
+                                            {# ICON #}
+                                            <div class="case-icon">
+                                                {% icon "archive" class="svg-white" height="90" width="90" %}
+                                            </div>
+                                            {# DATA #}
+                                            <div class="case-data">
+                                                {# LAST CASE #}
+                                                <p>{{ case.company }}</p>
+                                                <p>Industry: {{ case.industry }}</p>
+                                                <p>{{ case.created_at|date:"d/m/Y" }}</p>
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        {% else %}
+                            <div class="nothing-to-show-parent" id="{{ current_year }}">
+                            {% include "consultants/includes/nocase_send.html" %}
+                            </div>
+                        {% endif %}
+                        {% comment %} {# ALL CASES #}
+                        {% if cases %}
+                            <p class="mycases-subheadline">All</p>
+                            <div class="mycases">
+                                {% for case in cases %}
+                                <div class="case">
+                                    {{ case }}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {% include "consultants/includes/nocase_send.html" %}
+                        {% endif %} {% endcomment %}
+                    </div>
+                </div>
+            </div> 
+        </main>
+        
+    {% endblock side_container %}
