@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Urbanist&display=swap");
-form#reset-password-form div#container div#fields div.field:not(#login-submit) input, form#forgotten-password-form div#container div#fields div.field:not(#login-submit) input, form#login-form div#login-container div#fields div.field:not(#login-submit) input, form#reference-case-form div div textarea, form#reference-case-form div div input,
+form#add-certification-form div div textarea, form#add-certification-form div div input,
+form#add-certification-form div div select, form#reset-password-form div#container div#fields div.field:not(#login-submit) input, form#forgotten-password-form div#container div#fields div.field:not(#login-submit) input, form#login-form div#login-container div#fields div.field:not(#login-submit) input, form#reference-case-form div div textarea, form#reference-case-form div div input,
 form#reference-case-form div div select {
   font-family: "Urbanist", "Helvetica neue", sans-serif;
   font-size: 20px;
@@ -10,14 +11,14 @@ form#reference-case-form div div select {
   width: 100%;
 }
 
-div#mycases-container div#mycases-content div#allcases div[id$=-group] div.nothing-to-show-parent div.nothing-to-show button, form#reset-password-form div#container div#submit input[type=submit], form#forgotten-password-form div#container div#submit input[type=submit], form#login-form div#login-container div#login-submit input[type=submit], form#reference-case-form div button#process-button, form#reference-case-form div input[disabled], form#reference-case-form div input[type=submit] {
+form#add-certification-form div button#process-button, form#add-certification-form div input[disabled], form#add-certification-form div input[type=submit], div#mycases-container div#mycases-content div#allcases div[id$=-group] div.nothing-to-show-parent div.nothing-to-show button, form#reset-password-form div#container div#submit input[type=submit], form#forgotten-password-form div#container div#submit input[type=submit], form#login-form div#login-container div#login-submit input[type=submit], form#reference-case-form div button#process-button, form#reference-case-form div input[disabled], form#reference-case-form div input[type=submit] {
   border: none;
   border-radius: 8px;
   font-size: 20px;
   font-weight: 500;
   width: 90px;
   height: 36px;
-  margin: 10px 0;
+  margin: 10px 0 10px 20px;
   cursor: pointer;
 }
 
@@ -67,6 +68,15 @@ p.good {
   letter-spacing: 2px !important;
   margin-top: 10px !important;
   padding: 2px 7px !important;
+}
+
+p.mandatory {
+  color: #9d9d9d !important;
+  font-family: "Urbanist", "Helvetica neue", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  margin-left: 20px;
 }
 
 .loader {
@@ -218,6 +228,10 @@ form#reference-case-form div.parts .div-field div.label-icons {
   justify-content: flex-start;
   align-items: center;
   margin-left: 20px;
+}
+form#reference-case-form div.parts p.header {
+  font-size: 30px;
+  grid-column: 1/-1;
 }
 form#reference-case-form div.hide {
   display: none;
@@ -621,6 +635,84 @@ div#mycases-container div#mycases-content div#allcases p.mycases-year {
   font-size: 20px;
   font-weight: 500;
   margin-right: 60px;
+}
+
+form#add-certification-form {
+  margin: 0;
+  padding: 50px 270px 50px 100px;
+  display: grid;
+  grid-template-columns: auto;
+  row-gap: 40px;
+}
+form#add-certification-form div.parts {
+  display: grid;
+  grid-template-columns: auto auto;
+  row-gap: 30px;
+}
+form#add-certification-form div.parts .div-field {
+  display: grid;
+  row-gap: 10px;
+}
+form#add-certification-form div.parts .div-field div.label-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 20px;
+}
+form#add-certification-form div.parts .div-field:not(.date) {
+  grid-column: 1/-1;
+}
+form#add-certification-form div.parts p.header {
+  font-size: 30px;
+  grid-column: 1/-1;
+}
+form#add-certification-form div.hide {
+  display: none;
+}
+form#add-certification-form p.subtitles {
+  font-size: 26px;
+  grid-column: 1/-1;
+}
+form#add-certification-form div:not(.introduction-part) {
+  grid-template-columns: auto;
+}
+form#add-certification-form div.introduction-part {
+  grid-template-columns: auto auto;
+  column-gap: 100px;
+}
+form#add-certification-form div.submit-part {
+  grid-template-columns: auto;
+  justify-items: start;
+  column-gap: 20px;
+}
+form#add-certification-form div div label {
+  font-size: 22px;
+  margin-left: 5px;
+}
+form#add-certification-form div div input,
+form#add-certification-form div div select {
+  margin: 10px 0 10px 20px;
+}
+form#add-certification-form div div textarea {
+  margin: 10px 0 10px 20px;
+  resize: vertical;
+}
+form#add-certification-form div input[type=submit] {
+  color: white;
+  background-color: #2CE3A0;
+}
+form#add-certification-form div input[disabled] {
+  background-color: #9d9d9d;
+  color: white;
+  cursor: default;
+}
+form#add-certification-form div button#process-button {
+  background-color: #00A67E;
+  color: white;
+  cursor: pointer;
+  margin: 10px 0 10px 20px;
+  width: 140px;
 }
 
 /*# sourceMappingURL=style.css.map */

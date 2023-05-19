@@ -37,7 +37,7 @@ $header-gap: 0;
     font-weight: 500;
     width: 90px;
     height: $input-height;
-    margin: 10px 0;
+    margin: $input-margin;
     cursor: pointer;
 }
 
@@ -88,6 +88,15 @@ p.good {
     letter-spacing: 2px !important;
     margin-top: 10px !important;
     padding: 2px 7px !important;
+}
+
+p.mandatory {
+    color: $grey-disabled !important;
+    font-family: $font-family !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    margin-left: 20px;
 }
 
 // LOADER (LOADER.JS)
@@ -247,7 +256,6 @@ form#reference-case-form {
     padding: 50px 200px 50px 100px;
     display: grid;
     grid-template-columns: auto;
-    // grid-template-rows: auto;
     row-gap: 40px;
 
     div.parts {
@@ -257,6 +265,7 @@ form#reference-case-form {
         .div-field {
             display: grid;
             row-gap: 10px;
+
             div.label-icons {
                 display: flex;
                 flex-direction: row;
@@ -264,6 +273,11 @@ form#reference-case-form {
                 align-items: center;
                 margin-left: 20px;
             }
+        }
+
+        p.header {
+            font-size: 30px;
+            grid-column: 1 / -1;
         }
     }
 
@@ -778,5 +792,113 @@ div#mycases-container {
                 margin-right: 60px;
             }
         }
+    }
+}
+
+// ADD A CERTIFICATION FORM
+form#add-certification-form {
+    margin: 0;
+    padding: 50px 270px 50px 100px;
+    display: grid;
+    grid-template-columns: auto;
+    // grid-template-rows: auto;
+    row-gap: 40px;
+
+    div.parts {
+        display: grid;
+        grid-template-columns: auto auto;
+        row-gap: 30px;
+
+        .div-field {
+            display: grid;
+            row-gap: 10px;
+
+            div.label-icons {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                margin-left: 20px;
+            }
+        }
+
+        .div-field:not(.date) {
+            grid-column: 1 / -1;
+        }
+
+        p.header {
+            font-size: 30px;
+            grid-column: 1 / -1;
+        }
+    }
+
+    div.hide {
+        display: none;
+    }
+
+    p.subtitles {
+        font-size: 26px;
+        grid-column: 1 / -1;
+    }
+
+    div:not(.introduction-part) {
+        grid-template-columns: auto;
+    }
+
+    div.introduction-part {
+        grid-template-columns: auto auto;
+        column-gap: 100px;
+    }
+
+    div.submit-part {
+        grid-template-columns: auto;
+        justify-items: start;
+        column-gap: 20px;
+    }
+
+    div {
+        div {
+            label {
+                font-size: 22px;
+                margin-left: 5px;
+            }
+
+            input,
+            select {
+                @extend %basic-input;
+                margin: $input-margin;
+            }
+
+            textarea {
+                @extend %basic-input;
+                margin: $input-margin;
+                resize: vertical;
+            }
+        }
+
+        input[type=submit] {
+            @extend %button;
+            color: white;
+            background-color: $agilos-green;
+        }
+
+        input[disabled] {
+            @extend %button;
+            background-color: $grey-disabled;
+            color: white;
+            cursor: default;
+        }
+
+        button#process-button {
+            @extend %button;
+            background-color: $openAI-green;
+            color: white;
+            cursor: pointer;
+            margin: $input-margin;
+            width: 140px;
+
+        }
+
+
     }
 }
