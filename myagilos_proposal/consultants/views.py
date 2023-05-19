@@ -195,7 +195,7 @@ def reset_password(request, token):
 # ----------NORMAL VIEWS----------
 @login_required
 def home(request):
-    return HttpResponse("hello")
+    return render(request, HOME_TEMPLATE, {})
 
 @login_required
 def sendcase(request):
