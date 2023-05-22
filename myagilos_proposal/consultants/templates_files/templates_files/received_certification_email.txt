@@ -1,0 +1,19 @@
+Hello {first_name},
+
+{sender_first_name} {sender_last_name} has passed a new certification.
+
+    Company : {company}
+    Title: {title}
+    Date of issue: {earned_at}
+
+Therefore:
+    - The Agilos consultants team now counts {certifications_from_company} {company} certification(s).
+    - {this_certification_count} consultant(s) have passed this certification.
+
+Note that you can find this certification's information whenever you want by going on MyAgilos' admin page
+my.agilos.com/admin/consultants/certifications/
+and clicking on the good certification from {sender_first_name} {sender_last_name}.
+
+
+Sincerely yours,
+{mail_ending}

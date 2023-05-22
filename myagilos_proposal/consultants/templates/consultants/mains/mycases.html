@@ -37,16 +37,33 @@
                             <div class="case-component" id="mylastcase-content">
                                 {# ICON #}
                                 <div class="case-icon">
+                                    {% if last_case %}
                                     {% icon "archive" class="svg-white" height="90" width="90" %}
+                                    {% else %}
+                                    {% icon "x" class="svg-white" height="90" width="90" %}
+                                    {% endif %}
                                 </div>
                                 {# DATA #}
                                 <div class="case-data">
                                     {# LAST CASE #}
                                     {% if last_case %}
-                                    <p>{{ last_case.company }}</p>
-                                    <p>Industry: {{ last_case.industry }}</p>
-                                    <p>{{ last_case.created_at|date:"d/m/Y" }}</p>
-                                    <p>Thank you for helping Agilos.</p>
+                                    <div class="start">
+                                        <p class="company">{{ last_case.company }}</p>
+                                        <p class="industry">{{ last_case.industry }}</p>
+                                        <p class="date">Sent: {{ last_case.created_at|date:"d/m/Y" }}</p>
+                                    </div>
+                                    <div class="end">
+                                        <p>Thank you for helping Agilos.</p>
+                                    </div>
+                                    {% else %}
+                                    <div class="start">
+                                        <p>N/A</p>
+                                        <p>Industry: N/A</p>
+                                        <p>N/A</p>
+                                    </div>
+                                    <div class="end">
+                                        <p>No cases.</p>
+                                    </div>
                                     {% endif %}
                                 </div>
                             </div>
@@ -85,10 +102,9 @@
                                             {# DATA #}
                                             <div class="case-data">
                                                 {# LAST CASE #}
-                                                <p>{{ case.company }}</p>
-                                                <p>Industry: {{ case.industry }}</p>
-                                                <p>{{ case.created_at|date:"d/m/Y" }}</p>
-                                                <p></p>
+                                                <p class="company">{{ case.company }}</p>
+                                                <p class="industry">{{ case.industry }}</p>
+                                                <p class="date">Sent: {{ case.created_at|date:"d/m/Y" }}</p>
                                             </div>
                                         </div>
                                     {% endif %}

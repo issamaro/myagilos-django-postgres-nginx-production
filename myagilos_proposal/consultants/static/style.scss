@@ -1,6 +1,6 @@
 // URBANIST FONT IMPORT
 @import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600');
 // VARIABLES
 $font-family: "Urbanist", "Helvetica neue", sans-serif;
 $box-shadow: 0px 0px 6px rgb(216, 216, 216);
@@ -39,6 +39,46 @@ $header-gap: 0;
     height: $input-height;
     margin: $input-margin;
     cursor: pointer;
+}
+
+%case-icon {
+    background-color: $agilos-blue;
+    min-width: 140px;
+    min-height: 140px;
+    max-width: 140px;
+    max-height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: $box-shadow-darker;
+}
+
+%certification-icon {
+    background-color: $agilos-green;
+    min-width: 140px;
+    min-height: 140px;
+    max-width: 140px;
+    max-height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: $box-shadow-darker;
+
+    p.certification-first-letter {
+        color: white;
+        font-family: "Inter";
+        font-size: 90px;
+        font-weight: 600;
+    }
+
+    p.certification-na {
+        color: white;
+        font-family: "Inter";
+        font-size: 60px;
+        font-weight: 600;
+    }
 }
 
 // STARTING CONFIG
@@ -619,8 +659,7 @@ div#mycases-container {
     position: relative;
     padding: 50px 200px 50px 100px;
     row-gap: 40px;
-    // border: 2px solid $grey-disabled;
-
+    font-family: "Inter", "Helvetica Neue", sans-serif;
 
     p#mycases-headline {
         font-size: 30px;
@@ -631,24 +670,20 @@ div#mycases-container {
         display: grid;
         grid-template-rows: auto auto;
         row-gap: 50px;
-        // border: 2px solid $red;
 
 
         div#mycases-overview {
             display: grid;
             grid-template-columns: 3fr 4fr;
-            // border: 2px solid $openAI-green;
 
 
             div.block {
                 display: grid;
                 grid-template-rows: auto auto;
                 row-gap: 28px;
-                // border: 2px solid $agilos-blue;
 
 
                 p.mycases-subheadline {
-                    // border: 2px solid $agilos-green;
                     font-size: 26px;
                     font-weight: 600;
                 }
@@ -656,49 +691,71 @@ div#mycases-container {
                 div.case-component {
                     display: flex;
                     justify-content: flex-start;
+                    align-items: stretch;
 
                     div.case-icon {
-                        background-color: $agilos-blue;
-                        width: 140px;
-                        height: 140px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        border-radius: 8px;
-                        box-shadow: $box-shadow-darker;
+                        @extend %case-icon;
                     }
 
                     div.case-data {
-                        margin-left: 10px;
+                        margin-left: 20px;
                         padding: 6px 0;
-                        // border: 2px solid $grey-placeholder;
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
 
-                        p {
-                            // margin-bottom: 10px;
-                            font-size: 20px;
+                        div.start {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-start;
+
+                            p.company {
+                                font-size: 24px;
+                                font-family: "Helvetica Neue", sans-serif;
+                                font-weight: 500;
+                            }
+
+                            p.industry {
+                                font-size: 20px;
+                                font-weight: 700;
+                            }
+
+                            p.date {
+                                font-size: 16px;
+                                font-weight: 500;
+                            }
+
+                            p.hurry {
+                                color: $red;
+                                font-weight: 600;
+                            }
                         }
 
-                        p:nth-child(1):not(#mycases-target) {
-                            font-size: 24px;
-                            font-family: "Helvetica Neue", sans-serif;
-                            font-weight: 500;
+                        div.end {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-end;
+
+                            p {
+                                font-size: 18px;
+                                font-weight: 700;
+                            }
+
+                            p.emphase {
+                                font-size: 30px;
+                            }
                         }
 
                         p#mycases-target {
                             font-size: 60px;
                             margin: auto 0 auto 40px;
                         }
-
                     }
                 }
             }
         }
 
         div#allcases {
-            // border: 2px solid $agilos-green;
             display: grid;
             row-gap: 10px;
 
@@ -717,32 +774,52 @@ div#mycases-container {
                     justify-content: flex-start;
 
                     div.case-icon {
-                        background-color: $agilos-blue;
-                        width: 140px;
-                        height: 140px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        border-radius: 8px;
-                        box-shadow: $box-shadow-darker;
+                        @extend %case-icon;
                     }
 
                     div.case-data {
+                        margin-left: 20px;
                         padding: 6px 0;
-                        margin-left: 10px;
-                        // border: 2px solid $grey-placeholder;
                         display: flex;
                         flex-direction: column;
-                        justify-content: space-between;
+                        justify-content: flex-start;
 
-                        p {
-                            font-size: 20px;
-                        }
-
-                        p:nth-child(1) {
+                        p.company {
                             font-size: 24px;
                             font-family: "Helvetica Neue", sans-serif;
                             font-weight: 500;
+                        }
+
+                        p.industry {
+                            font-size: 20px;
+                            font-weight: 700;
+                        }
+
+                        p.date {
+                            font-size: 16px;
+                            font-weight: 500;
+                        }
+
+                        p.hurry {
+                            color: $red;
+                            font-weight: 600;
+                        }
+
+                        p {
+                            font-size: 18px;
+                            font-weight: 700;
+                        }
+
+                        p.emphase {
+                            font-size: 30px;
+                        }
+
+                        p.achieved {
+                            color: $agilos-green;
+                        }
+
+                        p.notachieved {
+                            color: $red;
                         }
                     }
                 }
@@ -900,5 +977,217 @@ form#add-certification-form {
         }
 
 
+    }
+}
+
+// MY CERTIFICATIONS PAGE
+div#mycertifications-container {
+    display: grid;
+    grid-template-rows: auto auto;
+    position: relative;
+    padding: 50px 200px 50px 100px;
+    row-gap: 40px;
+    // border: 2px solid $grey-disabled;
+
+
+    p#mycertifications-headline {
+        font-size: 30px;
+    }
+
+    div#mycertifications-content {
+        margin-left: 20px;
+        display: grid;
+        grid-template-rows: auto auto;
+        row-gap: 50px;
+        // border: 2px solid $red;
+
+
+        div#mycertifications-overview {
+            display: grid;
+            grid-template-columns: 3fr 4fr;
+            // border: 2px solid $openAI-green;
+            font-family: "Inter", "Helvetica Neue", sans-serif;
+
+            div.block {
+                display: grid;
+                grid-template-rows: auto auto;
+                row-gap: 28px;
+
+                p.mycertifications-subheadline {
+
+                    font-size: 26px;
+                    font-weight: 600;
+                }
+
+                div.certification-component {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: stretch;
+
+                    div.certification-icon {
+                        @extend %certification-icon;
+                    }
+
+                    div.certification-data {
+                        margin-left: 20px;
+                        padding: 6px 0;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        align-items: flex-start;
+
+                        div.start {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-start;
+
+                            p.company {
+                                font-size: 24px;
+                                font-family: "Helvetica Neue", sans-serif;
+                                font-weight: 500;
+                            }
+
+                            p.title {
+                                font-size: 20px;
+                                font-weight: 700;
+                            }
+
+                            p.date {
+                                font-size: 16px;
+                                font-weight: 500;
+                            }
+
+                            p.hurry {
+                                color: $red;
+                                font-weight: 600;
+                            }
+                        }
+
+                        div.end {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-end;
+
+                            p {
+                                font-size: 18px;
+                                font-weight: 700;
+                            }
+
+                            p.emphase {
+                                font-size: 30px;
+                            }
+
+                            p.achieved {
+                                color: $agilos-green;
+                            }
+
+                            p.notachieved {
+                                color: $red;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        div#allcertifications {
+            display: grid;
+            grid-template-rows: auto auto;
+            row-gap: 10px;
+            font-family: "Inter", "Helvetica Neue", sans-serif;
+
+            p#mycertifications-all-headline {
+                font-size: 30px;
+                grid-column: 1 / -1;
+                font-weight: 500;
+            }
+
+
+            div.mycertifications {
+                display: grid;
+                grid-template-columns: 3fr 4fr;
+                row-gap: 34px;
+
+
+                div.mycertifications-certification {
+                    display: flex;
+                    justify-content: flex-start;
+
+                    div.certification-icon {
+                        @extend %certification-icon;
+
+                    }
+
+                    div.certification-data {
+                        padding: 6px 0;
+                        margin-left: 20px;
+                        // border: 2px solid $grey-placeholder;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+
+                        p.company {
+                            font-size: 24px;
+                            font-family: "Helvetica Neue", sans-serif;
+                            font-weight: 500;
+                        }
+
+                        p.title {
+                            font-size: 20px;
+                            font-weight: 700;
+                        }
+
+                        p.date {
+                            font-size: 16px;
+                            font-weight: 500;
+                        }
+
+                        p.hurry {
+                            color: $red;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+
+            div.nothing-to-show-parent {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                grid-column: 1 / -1;
+                margin-right: 130px;
+
+                div.nothing-to-show {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: "Helvetica neue", sans-serif;
+                    font-size: 22px;
+                    font-weight: 400;
+
+                    p {
+                        margin-bottom: 10px;
+                    }
+
+                    strong {
+                        color: $red;
+                    }
+
+                    button {
+                        @extend %button;
+                        min-width: 160px;
+                        min-height: 40px;
+                        background-color: $agilos-green;
+
+                        a {
+                            font-family: "Inter", "Helvetica Neue", sans-serif;
+                            font-weight: 600;
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

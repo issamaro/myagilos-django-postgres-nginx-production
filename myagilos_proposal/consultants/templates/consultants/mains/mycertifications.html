@@ -9,16 +9,8 @@
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
     {% endblock style %}
 
-    {# Javascript #}
-    {% block javascript %}
-    <script src="{% static "divs-sorting.js" %}"></script>
-    <script src="{% static "red-target.js" %}"></script>
-    <script src="{% static "dynamic-list.js" %}"></script>
-    
-    {% endblock javascript %}
-
     {# Title #}
-    {% block page_title %}MyAgilos - My cases{% endblock page_title %}
+    {% block page_title %}MyAgilos - My certifications{% endblock page_title %}
 
 
 {# BODY #}
@@ -27,93 +19,112 @@
         {% include "consultants/includes/sidebar.html" %}
         {# MAIN #}
         <main>
-            <div id="mycases-container">
-                <p id="mycases-headline">My cases</p>
-                <div id="mycases-content">
-                    <div id="mycases-overview">
+            <div id="mycertifications-container">
+                <p id="mycertifications-headline">My certifications</p>
+                <div id="mycertifications-content">
+                    {# OVERVIEW #}
+                    <div id="mycertifications-overview">
                         {# LEFT #}
-                        <div class="block" id="lastcase">
+                        <div class="block" id="lastcertification">
                             {# HEADLINE #}
-                            <p class="mycases-subheadline" id="mylastcase-headline">My last case</p>
+                            <p class="mycertifications-subheadline" id="mylastcertification-headline">My last certification</p>
                             {# COMPONENT (ICON+DATA) #}
-                            <div class="case-component" id="mylastcase-content">
+                            <div class="certification-component" id="mylastcertification-content">
                                 {# ICON #}
-                                <div class="case-icon">
-                                    {% icon "archive" class="svg-white" height="90" width="90" %}
+                                <div class="certification-icon">
+                                    {% if last_certification %}
+                                    <p class="certification-first-letter">{{ last_certification.instance.certification.company|slice:"0:1" }}</p>
+                                    {% else %}
+                                    <p class="certification-na">N/A</p>
+                                    {% endif %}
                                 </div>
                                 {# DATA #}
-                                <div class="case-data">
-                                    {# LAST CASE #}
-                                    {% if last_case %}
-                                    <p>{{ last_case.company }}</p>
-                                    <p>Industry: {{ last_case.industry }}</p>
-                                    <p>{{ last_case.created_at|date:"d/m/Y" }}</p>
-                                    <p>Thank you for helping Agilos.</p>
+                                <div class="certification-data">
+                                    {# LAST CERTIFICATION #}
+                                    {% if last_certification %}
+                                    <div class="start">
+                                        <p class="company">{{ last_certification.instance.certification.company }}</p>
+                                        <p class="title">{{ last_certification.instance.certification.title }}</p>
+                                        <p class="date">Earned: {{ last_certification.instance.earned_at|date:"d/m/Y" }}</p>
+                                        {% if last_certification.instance.expires_at %}
+                                        <p class="{% if last_certification.hurry == True %}hurry {% endif %}date">Expires: {{ last_certification.instance.expires_at|date:"d/m/Y" }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="end">
+                                        <p>Thank you for helping Agilos.</p>
+                                    </div>
+                                    {% else %}
+                                    <div class="start">
+                                        <p class="company">N/A</p>
+                                        <p class="title">N/A</p>
+                                        <p class="date">Earned: N/A</p>
+                                    </div>
+                                    <div class="end">
+                                        <p>No certifications.</p>
+                                    </div>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
                         {# RIGHT #}
-                        <div class="block" id="current-year-cases-count">
+                        <div class="block" id="current-year-certifications-count">
                             {# HEADLINE #}
-                            <p class="mycases-subheadline" id="cycc-headline">Target {% now "Y" %}</p>
+                            <p class="mycertifications-subheadline" id="cycc-headline">Target {% now "Y" %}</p>
                             {# COMPONENT (ICON+DATA) #}
-                            <div class="case-component" id="cycc-content">
+                            <div class="certification-component" id="cycc-content">
                                 {# ICON #}
-                                <div class="case-icon">
-                                    {% icon "archive" class="svg-white" height="90" width="90" %}
+                                <div class="certification-icon">
+                                    <p class="certification-first-letter">{{ target_certification.certification.company|slice:"0:1" }}</p>
                                 </div>
                                 {# DATA #}
-                                <div class="case-data">
-                                    {# NUMBER OF CASES FROM CURRENT YEAR #}
-                                    {% if current_year_cases_count >= 0 %}
-                                    <p id="mycases-target">{{ current_year_cases_count }}/1</p>
+                                <div class="certification-data">
+                                    {# TARGET CERTIFICATION #}
+                                    {% if target_certification %}
+                                        <div class="start">
+                                            <p class="company">{{ target_certification.certification.company }}</p>
+                                            <p class="title">{{ target_certification.certification.title }}</p>
+                                        </div>
+                                        <div class="end">
+                                            {% if target_status == True %}
+                                            <p class="emphase achieved">Achieved.</p>
+                                            {% else %}
+                                            <p class="emphase notachieved">Not achieved yet.</p>
+                                            {% endif %}
+                                        </div>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="allcases">
-                        <p id="mycases-all-headline">All</p>
-                        {% if cases %}
-                            {% for year in years_desc %}
-                                {% for case in cases %}
-                                    {% if case.year == year %}
-                                        <div class="mycases-case" id="{{ case.year }}">
+                    {# ALL CERTIFICATIONS #}
+                    <div id="allcertifications">
+                        <p id="mycertifications-all-headline">All</p>
+                        <div class="mycertifications">
+                            {% if certifications %}
+                                {% for certification in certifications %}
+                                        <div class="mycertifications-certification" id="{{ certification.instance.certification.company }}">
                                             {# ICON #}
-                                            <div class="case-icon">
-                                                {% icon "archive" class="svg-white" height="90" width="90" %}
+                                            <div class="certification-icon">
+                                                <p class="certification-first-letter">{{ certification.instance.certification.company|slice:"0:1" }}</p>
                                             </div>
                                             {# DATA #}
-                                            <div class="case-data">
-                                                {# LAST CASE #}
-                                                <p>{{ case.company }}</p>
-                                                <p>Industry: {{ case.industry }}</p>
-                                                <p>{{ case.created_at|date:"d/m/Y" }}</p>
-                                                <p></p>
+                                            <div class="certification-data">
+                                                {# CERTIFICATION #}
+                                                <p class="company">{{ certification.instance.certification.company }}</p>
+                                                <p class="title">{{ certification.instance.certification.title }}</p>
+                                                <p class="date">Earned: {{ certification.instance.earned_at|date:"d/m/Y" }}</p>
+                                                {% if certification.instance.expires_at %}
+                                                <p class="{% if certification.hurry == True %}hurry {% endif %}date">Expires: {{ certification.instance.expires_at|date:"d/m/Y" }}</p>
+                                                {% endif %}
                                             </div>
                                         </div>
-                                    {% endif %}
                                 {% endfor %}
-                            {% endfor %}
-                        {% else %}
-                            <div class="nothing-to-show-parent" id="{{ current_year }}">
-                            {% include "consultants/includes/nocase_send.html" %}
-                            </div>
-                        {% endif %}
-                        {% comment %} {# ALL CASES #}
-                        {% if cases %}
-                            <p class="mycases-subheadline">All</p>
-                            <div class="mycases">
-                                {% for case in cases %}
-                                <div class="case">
-                                    {{ case }}
+                            {% else %}
+                                <div class="nothing-to-show-parent">
+                                {% include "consultants/includes/nocertification_add.html" %}
                                 </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {% include "consultants/includes/nocase_send.html" %}
-                        {% endif %} {% endcomment %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div> 

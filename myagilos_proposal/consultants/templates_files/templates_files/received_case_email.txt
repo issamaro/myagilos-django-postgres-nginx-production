@@ -1,0 +1,37 @@
+Hello {first_name},
+
+{sender_first_name} {sender_last_name} has sent a new case.
+
+    Input from the consultant:
+        INTRODUCTION
+            Company : {company}
+            Industry: {industry}
+            Project start date: {project_start}
+            Project end date: {project_end}
+
+        PROBLEM
+            Issue: {issue}
+            Architecture: {architecture}
+            Challenge: {challenge}
+
+        SOLUTION
+            Solution:
+            {solution}
+            Tools:
+            {tools}
+        AGILOS
+            Why Agilos?:
+            {why_agilos}
+
+    Output from chatGPT:
+        GPT CASE
+            {gpt_content}
+
+Note that you can find this case information whenever you want by going on MyAgilos' admin page
+my.agilos.com/admin/consultants/cases/
+and clicking on the good case from {sender_first_name} {sender_last_name}.
+
+I hope that you will find this case helpful.
+
+Sincerely yours,
+{mail_ending}

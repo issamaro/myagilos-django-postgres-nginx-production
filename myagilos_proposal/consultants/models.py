@@ -86,12 +86,10 @@ class Certifications(models.Model):
         max_length=64, choices=CODES, unique=True, blank=True, null=True)
     consultants = models.ManyToManyField(
         "Consultants", through="Consultant_certifications", related_name="related_certifications")
-
     class Meta:
         verbose_name_plural = "Certifications"
         unique_together = (
             ("company", "title"),
-            ("title", "code"),
         )
 
     def __str__(self):
@@ -116,10 +114,9 @@ class Consultant_certifications(models.Model):
     certification_idcode = models.CharField(
         max_length=128, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
     class Meta:
         verbose_name_plural = "Consultant_certifications"
-        unique_together = (("consultant", "certification"),)
+        # unique_together = (("consultant", "certification"),)
 
     def __str__(self):
         """
@@ -153,7 +150,6 @@ class Certification_progress(models.Model):
         if self.achieved:
             return f"{self.consultant.first_name} {self.consultant.last_name} - {self.target.certification.title} - Achieved"
         return f"{self.consultant.first_name} {self.consultant.last_name} - {self.target.certification.title} - Not achieved"
-
 
 class Certification_targets(models.Model):
     """
@@ -206,7 +202,7 @@ class Cases(models.Model):
         ("Law and Legal Services", "Law and Legal Services"),
         ("Manufacturing", "Manufacturing"),
         ("Media and Entertainment", "Media and Entertainment"),
-        ("Nonprofit ans Social Services", "Nonprofit ans Social Services"),
+        ("Nonprofit and Social Services", "Nonprofit and Social Services"),
         ("Pharmaceuticals", "Pharmaceuticals"),
         ("Real Estate", "Real Estate"),
         ("Retail", "Retail"),
