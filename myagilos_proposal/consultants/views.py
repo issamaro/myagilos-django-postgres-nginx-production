@@ -33,8 +33,8 @@ RECEIVED_CASE_EMAIL_TXT = "consultants/templates_files/received_case_email.txt"
 RECEIVED_CERTIFICATION_EMAIL_TXT = "consultants/templates_files/received_certification_email.txt"
 MAIL_ENDING = "The MyAgilos Support Team"
 # ----------MYAGILOS SUPPORT MAIL----------
-MYAGILOS_SUPPORT_MAIL = os.environ.get("MYAGILOS_SUPPORT_MAIL")
-MYAGILOS_SUPPORT_PASSWORD = os.environ.get("MYAGILOS_SUPPORT_PASSWORD")
+MYAGILOS_SUPPORT_MAIL = os.environ.get("MAIL_SENDER")
+MYAGILOS_SUPPORT_PASSWORD = os.environ.get("MAIL_PASSWORD")
 # ----------RESPONSIBLE USERS----------
 MANAGER_MAIL = os.environ.get("MANAGER_MAIL")
 MKT_MAIL = os.environ.get("MKT_MAIL")
