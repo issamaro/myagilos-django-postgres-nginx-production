@@ -1,0 +1,133 @@
+{% extends "consultants/layouts/base.html" %}
+{% load static %}
+{% load icon %}
+
+{# HEAD #}
+    {# Style #}
+    {% block style %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    {% endblock style %}
+
+    {# Title #}
+    {% block page_title %}MyAgilos - My certifications{% endblock page_title %}
+
+
+{# BODY #}
+    {% block side_container %}
+        {# HEADER #}
+        {% include "consultants/includes/sidebar.html" %}
+        {# MAIN #}
+        <main>
+            <div id="mycertifications-container">
+                <p id="mycertifications-headline">My certifications</p>
+                <div id="mycertifications-content">
+                    {# OVERVIEW #}
+                    <div id="mycertifications-overview">
+                        {# LEFT #}
+                        <div class="block" id="lastcertification">
+                            {# HEADLINE #}
+                            <p class="mycertifications-subheadline" id="mylastcertification-headline">My last certification</p>
+                            {# COMPONENT (ICON+DATA) #}
+                            <div class="certification-component" id="mylastcertification-content">
+                                {# ICON #}
+                                <div class="certification-icon">
+                                    {% if last_certification %}
+                                    <p class="certification-first-letter">{{ last_certification.instance.certification.company|slice:"0:1" }}</p>
+                                    {% else %}
+                                    <p class="certification-na">N/A</p>
+                                    {% endif %}
+                                </div>
+                                {# DATA #}
+                                <div class="certification-data">
+                                    {# LAST CERTIFICATION #}
+                                    {% if last_certification %}
+                                    <div class="start">
+                                        <p class="company">{{ last_certification.instance.certification.company }}</p>
+                                        <p class="title">{{ last_certification.instance.certification.title }}</p>
+                                        <p class="date">Earned: {{ last_certification.instance.earned_at|date:"d/m/Y" }}</p>
+                                        {% if last_certification.instance.expires_at %}
+                                        <p class="{% if last_certification.hurry == True %}hurry {% endif %}date">Expires: {{ last_certification.instance.expires_at|date:"d/m/Y" }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="end">
+                                        <p>Thank you for helping Agilos.</p>
+                                    </div>
+                                    {% else %}
+                                    <div class="start">
+                                        <p class="company">N/A</p>
+                                        <p class="title">N/A</p>
+                                        <p class="date">Earned: N/A</p>
+                                    </div>
+                                    <div class="end">
+                                        <p>No certifications.</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {# RIGHT #}
+                        <div class="block" id="current-year-certifications-count">
+                            {# HEADLINE #}
+                            <p class="mycertifications-subheadline" id="cycc-headline">Target {% now "Y" %}</p>
+                            {# COMPONENT (ICON+DATA) #}
+                            <div class="certification-component" id="cycc-content">
+                                {# ICON #}
+                                <div class="certification-icon">
+                                    <p class="certification-first-letter">{{ target_certification.certification.company|slice:"0:1" }}</p>
+                                </div>
+                                {# DATA #}
+                                <div class="certification-data">
+                                    {# TARGET CERTIFICATION #}
+                                    {% if target_certification %}
+                                        <div class="start">
+                                            <p class="company">{{ target_certification.certification.company }}</p>
+                                            <p class="title">{{ target_certification.certification.title }}</p>
+                                        </div>
+                                        <div class="end">
+                                            {% if target_status == True %}
+                                            <p class="emphase achieved">Achieved.</p>
+                                            {% else %}
+                                            <p class="emphase notachieved">Not achieved yet.</p>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {# ALL CERTIFICATIONS #}
+                    <div id="allcertifications">
+                        <p id="mycertifications-all-headline">All</p>
+                        <div class="mycertifications">
+                            {% if certifications %}
+                                {% for certification in certifications %}
+                                        <div class="mycertifications-certification" id="{{ certification.instance.certification.company }}">
+                                            {# ICON #}
+                                            <div class="certification-icon">
+                                                <p class="certification-first-letter">{{ certification.instance.certification.company|slice:"0:1" }}</p>
+                                            </div>
+                                            {# DATA #}
+                                            <div class="certification-data">
+                                                {# CERTIFICATION #}
+                                                <p class="company">{{ certification.instance.certification.company }}</p>
+                                                <p class="title">{{ certification.instance.certification.title }}</p>
+                                                <p class="date">Earned: {{ certification.instance.earned_at|date:"d/m/Y" }}</p>
+                                                {% if certification.instance.expires_at %}
+                                                <p class="{% if certification.hurry == True %}hurry {% endif %}date">Expires: {{ certification.instance.expires_at|date:"d/m/Y" }}</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="nothing-to-show-parent">
+                                {% include "consultants/includes/nocertification_add.html" %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </main>
+        
+    {% endblock side_container %}

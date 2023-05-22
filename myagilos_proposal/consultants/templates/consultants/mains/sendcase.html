@@ -1,0 +1,34 @@
+{% extends "consultants/layouts/base.html" %}
+{% load static %}
+{% load icon %}
+{# HEAD #}
+    {# Style #}
+    {% block style %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% endblock style %}
+
+    {# Javascript #}
+    {% block javascript %}
+    <script src="{% static "disable-sending.js" %}"></script>
+    <script src="{% static "gptform.js" %}"></script>
+    <script src="{% static "input-auto-height.js" %}"></script>
+    <script src="{% static "remove_lastchar.js" %}"></script>
+    {% endblock javascript %}
+
+    {# Title #}
+    {% block page_title %}MyAgilos - Send a Case{% endblock page_title %}
+
+
+{# BODY #}
+{% block side_container %}
+    
+    {# HEADER #}
+    {% include "consultants/includes/sidebar.html" %}
+    {# MAIN #}
+    <main>
+        {# FORM #}
+        {% if form %}
+        {% include "consultants/includes/sendcase_form.html" %}
+        {% endif %}
+    </main>
+{% endblock side_container %}

@@ -1,0 +1,33 @@
+{% extends "consultants/layouts/base.html" %}
+{% load static %}
+{% load icon %}
+
+{# HEAD #}
+{# Style #}
+{% block style %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+{% endblock style %}
+
+{# Javascript #}
+{% block javascript %}
+<script src="{% static "red-target.js" %}"></script>
+<script src="{% static "dynamic-list.js" %}"></script>
+
+{% endblock javascript %}
+
+{# Title #}
+{% block page_title %}MyAgilos - Home{% endblock page_title %}
+
+{% if success %}
+    {{ success }}        
+{% else %}
+        {# BODY #}
+    {% block side_container %}
+            {# HEADER #}
+            {% include "consultants/includes/sidebar.html" %}
+            {# MAIN #}
+            <main>
+            </main>
+    {% endblock side_container %}
+{% endif %}
