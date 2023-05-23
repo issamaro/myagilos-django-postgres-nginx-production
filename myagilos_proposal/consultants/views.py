@@ -36,22 +36,19 @@ MAIL_ENDING = "The MyAgilos Support Team"
 MYAGILOS_SUPPORT_MAIL = os.environ.get("MAIL_SENDER")
 MYAGILOS_SUPPORT_PASSWORD = os.environ.get("MAIL_PASSWORD")
 # ----------RESPONSIBLE USERS----------
-MANAGER_MAIL = os.environ.get("MANAGER_MAIL")
-MKT_MAIL = os.environ.get("MKT_MAIL")
-HR_MAIL = os.environ.get("HR_MAIL")
 RESPONSIBLE_USERS = {
     "MANAGER": {
-        "MAIL": MANAGER_MAIL,
+        "MAIL": os.environ.get("MANAGER_MAIL"),
         "USER": None,
         "FIRST_NAME": None
     },
     "MKT": {
-        "MAIL": MKT_MAIL,
+        "MAIL": os.environ.get("MKT_MAIL"),
         "USER": None,
         "FIRST_NAME": None
     },
     "HR": {
-        "MAIL": HR_MAIL,
+        "MAIL": os.environ.get("HR_MAIL"),
         "USER": None,
         "FIRST_NAME": None
     }
@@ -238,7 +235,64 @@ def reset_password(request, token):
 # ----------NORMAL VIEWS----------
 @login_required
 def home(request):
-    return render(request, HOME_TEMPLATE, {})
+    three_months_date = CURRENT_DATE + timedelta(days=90)
+    if request.method == "GET":
+        # CONSULTANT INSTANCE
+        consultant = {"instance": Consultants.objects.get(user=request.user)}
+
+# ----------CERTIFICATIONS----------
+        # CERTIFICATIONS
+        consultant["certifications"] = consultant["instance"].consultant_certifications_set.filter(
+            Q(expires_at__isnull=True) |
+            Q(expires_at__gte=CURRENT_DATE)
+        ).order_by("-earned_at", "-created_at")
+        consultant["certifications"] = [{
+            "instance": instance,
+            "hurry": True if instance.expires_at and instance.expires_at <= three_months_date else False
+        } for instance in consultant["certifications"]]
+
+        # LAST CERTIFICATION
+        try:
+            consultant["last_certification"] = consultant["certifications"][0]
+        except IndexError:
+            consultant["last_certification"] = None
+
+        # TARGET
+        consultant["target"] = {
+            "certification": consultant["instance"].target
+        }
+        consultant["target"]["achieved"] = Certification_progress.objects.get(
+            consultant=consultant["instance"],
+            target=consultant["target"]["certification"]
+        ).achieved
+        
+# ----------CASES----------
+        # CASES
+        consultant["cases"] = {
+            "all": Cases.objects.filter(author=consultant["instance"]).order_by("-created_at")
+        }
+        
+        # LAST CASE
+        try:
+            consultant["cases"]["last"] = consultant["cases"]["all"][0]
+        except IndexError:
+            consultant["cases"]["last"] = None
+        
+        # NUMBER OF CASES SENT IN CURRENT YEAR
+        consultant["cases"]["from_year"] = len(
+            consultant["cases"]["all"].filter(year=CURRENT_YEAR))
+        years_desc = list(range(2023, CURRENT_YEAR + 1))[::-1]
+        years_desc_test = list(range(2021, CURRENT_YEAR + 1))[::-1]
+        return render(request, HOME_TEMPLATE, {
+            "last_certification": consultant["last_certification"],
+            "target_certification": consultant["target"]["certification"],
+            "target_status": consultant["target"]["achieved"],
+            "last_case": consultant["cases"]["last"],
+            "current_year_cases_count": consultant["cases"]["from_year"],
+            "years_desc": years_desc_test,
+            "current_year": CURRENT_YEAR
+        })
+
 
 
 @login_required

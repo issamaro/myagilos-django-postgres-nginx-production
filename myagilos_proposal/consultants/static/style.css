@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Urbanist&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600");
 form#add-certification-form div div textarea, form#add-certification-form div div input,
 form#add-certification-form div div select, form#reset-password-form div#container div#fields div.field:not(#login-submit) input, form#forgotten-password-form div#container div#fields div.field:not(#login-submit) input, form#login-form div#login-container div#fields div.field:not(#login-submit) input, form#reference-case-form div div textarea, form#reference-case-form div div input,
 form#reference-case-form div div select {
@@ -12,7 +13,7 @@ form#reference-case-form div div select {
   width: 100%;
 }
 
-div#mycertifications-container div#mycertifications-content div#allcertifications div.nothing-to-show-parent div.nothing-to-show button, form#add-certification-form div button#process-button, form#add-certification-form div input[disabled], form#add-certification-form div input[type=submit], div#mycases-container div#mycases-content div#allcases div[id$=-group] div.nothing-to-show-parent div.nothing-to-show button, form#reset-password-form div#container div#submit input[type=submit], form#forgotten-password-form div#container div#submit input[type=submit], form#login-form div#login-container div#login-submit input[type=submit], form#reference-case-form div button#process-button, form#reference-case-form div input[disabled], form#reference-case-form div input[type=submit] {
+div#home-container div#home-content div#mycases-overview button, div#home-container div#home-content div#mycertifications-overview button, div#mycertifications-container div#mycertifications-content div#allcertifications div.nothing-to-show-parent div.nothing-to-show button, form#add-certification-form div button#process-button, form#add-certification-form div input[disabled], form#add-certification-form div input[type=submit], div#mycases-container div#mycases-content div#allcases div[id$=-group] div.nothing-to-show-parent div.nothing-to-show button, form#reset-password-form div#container div#submit input[type=submit], form#forgotten-password-form div#container div#submit input[type=submit], form#login-form div#login-container div#login-submit input[type=submit], form#reference-case-form div button#process-button, form#reference-case-form div input[disabled], form#reference-case-form div input[type=submit] {
   border: none;
   border-radius: 8px;
   font-size: 20px;
@@ -23,7 +24,7 @@ div#mycertifications-container div#mycertifications-content div#allcertification
   cursor: pointer;
 }
 
-div#mycases-container div#mycases-content div#allcases div[id$=-group] div.mycases-case div.case-icon, div#mycases-container div#mycases-content div#mycases-overview div.block div.case-component div.case-icon {
+div#home-container div#home-content div#mycases-overview div.block div.case-component div.case-icon, div#mycases-container div#mycases-content div#allcases div[id$=-group] div.mycases-case div.case-icon, div#mycases-container div#mycases-content div#mycases-overview div.block div.case-component div.case-icon {
   background-color: #3756F5;
   min-width: 140px;
   min-height: 140px;
@@ -36,7 +37,7 @@ div#mycases-container div#mycases-content div#allcases div[id$=-group] div.mycas
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
-div#mycertifications-container div#mycertifications-content div#allcertifications div.mycertifications div.mycertifications-certification div.certification-icon, div#mycertifications-container div#mycertifications-content div#mycertifications-overview div.block div.certification-component div.certification-icon {
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-icon, div#mycertifications-container div#mycertifications-content div#allcertifications div.mycertifications div.mycertifications-certification div.certification-icon, div#mycertifications-container div#mycertifications-content div#mycertifications-overview div.block div.certification-component div.certification-icon {
   background-color: #2CE3A0;
   min-width: 140px;
   min-height: 140px;
@@ -48,13 +49,13 @@ div#mycertifications-container div#mycertifications-content div#allcertification
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
-div#mycertifications-container div#mycertifications-content div#allcertifications div.mycertifications div.mycertifications-certification div.certification-icon p.certification-first-letter, div#mycertifications-container div#mycertifications-content div#mycertifications-overview div.block div.certification-component div.certification-icon p.certification-first-letter {
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-icon p.certification-first-letter, div#mycertifications-container div#mycertifications-content div#allcertifications div.mycertifications div.mycertifications-certification div.certification-icon p.certification-first-letter, div#mycertifications-container div#mycertifications-content div#mycertifications-overview div.block div.certification-component div.certification-icon p.certification-first-letter {
   color: white;
   font-family: "Inter";
   font-size: 90px;
   font-weight: 600;
 }
-div#mycertifications-container div#mycertifications-content div#allcertifications div.mycertifications div.mycertifications-certification div.certification-icon p.certification-na, div#mycertifications-container div#mycertifications-content div#mycertifications-overview div.block div.certification-component div.certification-icon p.certification-na {
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-icon p.certification-na, div#mycertifications-container div#mycertifications-content div#allcertifications div.mycertifications div.mycertifications-certification div.certification-icon p.certification-na, div#mycertifications-container div#mycertifications-content div#mycertifications-overview div.block div.certification-component div.certification-icon p.certification-na {
   color: white;
   font-family: "Inter";
   font-size: 60px;
@@ -87,34 +88,33 @@ textarea:focus {
   outline: none;
 }
 
-p.error {
-  background-color: #FF4545 !important;
-  color: white !important;
+p.error,
+p.good,
+p.mandatory {
   font-family: "Urbanist", "Helvetica neue", sans-serif !important;
   font-size: 16px !important;
   font-weight: 700 !important;
   letter-spacing: 2px !important;
+}
+
+p.error,
+p.good {
+  background-color: #FF4545 !important;
+  color: white !important;
   margin-top: 10px !important;
   padding: 2px 7px !important;
+}
+
+p.error {
+  background-color: #FF4545 !important;
 }
 
 p.good {
   background-color: #2CE3A0 !important;
-  color: white !important;
-  font-family: "Urbanist", "Helvetica neue", sans-serif !important;
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  letter-spacing: 2px !important;
-  margin-top: 10px !important;
-  padding: 2px 7px !important;
 }
 
 p.mandatory {
   color: #9d9d9d !important;
-  font-family: "Urbanist", "Helvetica neue", sans-serif !important;
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  letter-spacing: 2px !important;
   margin-left: 20px;
 }
 
@@ -231,6 +231,17 @@ p.mandatory {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+#side-container header div.header-logo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#side-container header div.header-logo p {
+  font-family: "Work Sans", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #2CE3A0;
 }
 #side-container header button#logout {
   border: none;
@@ -941,6 +952,175 @@ div#mycertifications-container div#mycertifications-content div#allcertification
 div#mycertifications-container div#mycertifications-content div#allcertifications div.nothing-to-show-parent div.nothing-to-show button a {
   font-family: "Inter", "Helvetica Neue", sans-serif;
   font-weight: 600;
+  color: white;
+}
+
+div#home-container {
+  display: grid;
+  grid-template-rows: auto auto;
+  position: relative;
+  padding: 50px 200px 50px 100px;
+  row-gap: 40px;
+}
+div#home-container p#home-headline {
+  font-size: 30px;
+}
+div#home-container div#home-content {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  margin-left: 20px;
+}
+div#home-container div#home-content div#mycertifications-overview {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 40px 0px;
+  font-family: "Inter", "Helvetica Neue", sans-serif;
+}
+div#home-container div#home-content div#mycertifications-overview div.block {
+  display: grid;
+  grid-template-rows: auto auto;
+  row-gap: 28px;
+}
+div#home-container div#home-content div#mycertifications-overview div.block p.mycertifications-subheadline {
+  font-size: 26px;
+  font-weight: 600;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-data {
+  margin-left: 20px;
+  padding: 6px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-data div.start {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-data div.start p.company {
+  font-size: 24px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 500;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-data div.start p.title {
+  font-size: 20px;
+  font-weight: 700;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-data div.start p.date {
+  font-size: 16px;
+  font-weight: 500;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-data div.start p.hurry {
+  color: #FF4545;
+  font-weight: 600;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-data div.end {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-data div.end p {
+  font-size: 18px;
+  font-weight: 700;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-data div.end p.emphase {
+  font-size: 22px;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-data div.end p.achieved {
+  color: #2CE3A0;
+}
+div#home-container div#home-content div#mycertifications-overview div.block div.certification-component div.certification-data div.end p.notachieved {
+  color: #FF4545;
+}
+div#home-container div#home-content div#mycertifications-overview button {
+  max-width: 200px;
+  min-width: 200px;
+  background-color: #2CE3A0;
+  margin-left: 0;
+}
+div#home-container div#home-content div#mycertifications-overview button a {
+  color: white;
+}
+div#home-container div#home-content div#mycases-overview {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 40px 0px;
+  font-family: "Inter", "Helvetica Neue", sans-serif;
+}
+div#home-container div#home-content div#mycases-overview div.block {
+  display: grid;
+  grid-template-rows: auto auto;
+  row-gap: 28px;
+}
+div#home-container div#home-content div#mycases-overview div.block p.mycases-subheadline {
+  font-size: 26px;
+  font-weight: 600;
+}
+div#home-container div#home-content div#mycases-overview div.block div.case-component {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+div#home-container div#home-content div#mycases-overview div.block div.case-component div.case-data {
+  margin-left: 20px;
+  padding: 6px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+div#home-container div#home-content div#mycases-overview div.block div.case-component div.case-data div.start {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+div#home-container div#home-content div#mycases-overview div.block div.case-component div.case-data div.start p.company {
+  font-size: 24px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 500;
+}
+div#home-container div#home-content div#mycases-overview div.block div.case-component div.case-data div.start p.industry {
+  font-size: 20px;
+  font-weight: 700;
+}
+div#home-container div#home-content div#mycases-overview div.block div.case-component div.case-data div.start p.date {
+  font-size: 16px;
+  font-weight: 500;
+}
+div#home-container div#home-content div#mycases-overview div.block div.case-component div.case-data div.start p.hurry {
+  color: #FF4545;
+  font-weight: 600;
+}
+div#home-container div#home-content div#mycases-overview div.block div.case-component div.case-data div.end {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+div#home-container div#home-content div#mycases-overview div.block div.case-component div.case-data div.end p {
+  font-size: 18px;
+  font-weight: 700;
+}
+div#home-container div#home-content div#mycases-overview div.block div.case-component div.case-data div.end p.emphase {
+  font-size: 30px;
+}
+div#home-container div#home-content div#mycases-overview div.block div.case-component div.case-data p#mycases-target {
+  font-size: 60px;
+  margin: auto 0 auto 40px;
+}
+div#home-container div#home-content div#mycases-overview button {
+  max-width: 160px;
+  min-width: 160px;
+  background-color: #3756F5;
+  margin-left: 0;
+}
+div#home-container div#home-content div#mycases-overview button a {
   color: white;
 }
 

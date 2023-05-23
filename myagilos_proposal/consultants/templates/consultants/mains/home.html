@@ -12,8 +12,6 @@
 {# Javascript #}
 {% block javascript %}
 <script src="{% static "red-target.js" %}"></script>
-<script src="{% static "dynamic-list.js" %}"></script>
-
 {% endblock javascript %}
 
 {# Title #}
@@ -28,6 +26,150 @@
             {% include "consultants/includes/sidebar.html" %}
             {# MAIN #}
             <main>
+                <div id="home-container">
+                    <p id="home-headline">Overview</p>
+                    <div id="home-content">
+                        <div id="mycertifications-overview">
+                            {# UP #}
+                            <div class="block" id="lastcertification">
+                                {# HEADLINE #}
+                                <p class="mycertifications-subheadline" id="mylastcertification-headline">My last certification</p>
+                                {# COMPONENT (ICON+DATA) #}
+                                <div class="certification-component" id="mylastcertification-content">
+                                    {# ICON #}
+                                    <div class="certification-icon">
+                                        {% if last_certification %}
+                                        <p class="certification-first-letter">{{ last_certification.instance.certification.company|slice:"0:1" }}</p>
+                                        {% else %}
+                                        <p class="certification-na">N/A</p>
+                                        {% endif %}
+                                    </div>
+                                    {# DATA #}
+                                    <div class="certification-data">
+                                        {# LAST CERTIFICATION #}
+                                        {% if last_certification %}
+                                        <div class="start">
+                                            <p class="company">{{ last_certification.instance.certification.company }}</p>
+                                            <p class="title">{{ last_certification.instance.certification.title }}</p>
+                                            <p class="date">Earned: {{ last_certification.instance.earned_at|date:"d/m/Y" }}</p>
+                                            {% if last_certification.instance.expires_at %}
+                                            <p class="{% if last_certification.hurry == True %}hurry {% endif %}date">Expires: {{ last_certification.instance.expires_at|date:"d/m/Y" }}</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="end">
+                                            <p>Thank you for helping Agilos.</p>
+                                        </div>
+                                        {% else %}
+                                        <div class="start">
+                                            <p class="company">N/A</p>
+                                            <p class="title">N/A</p>
+                                            <p class="date">Earned: N/A</p>
+                                        </div>
+                                        <div class="end">
+                                            <p>No certifications.</p>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {# DOWN #}
+                            <div class="block" id="current-year-certifications-count">
+                                {# HEADLINE #}
+                                <p class="mycertifications-subheadline" id="cycc-headline">Target {% now "Y" %}</p>
+                                {# COMPONENT (ICON+DATA) #}
+                                <div class="certification-component" id="cycc-content">
+                                    {# ICON #}
+                                    <div class="certification-icon">
+                                        <p class="certification-first-letter">{{ target_certification.certification.company|slice:"0:1" }}</p>
+                                    </div>
+                                    {# DATA #}
+                                    <div class="certification-data">
+                                        {# TARGET CERTIFICATION #}
+                                        {% if target_certification %}
+                                            <div class="start">
+                                                <p class="company">{{ target_certification.certification.company }}</p>
+                                                <p class="title">{{ target_certification.certification.title }}</p>
+                                            </div>
+                                            <div class="end">
+                                                {% if target_status == True %}
+                                                <p class="emphase achieved">Achieved.</p>
+                                                {% else %}
+                                                <p class="emphase notachieved">Not achieved yet.</p>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="addcertification">
+                                <a href="{% url 'consultants:addcertification' %}">Add a certification</a>
+                            </button>
+                        </div>
+                        <div id="mycases-overview">
+                            {# UP #}
+                            <div class="block" id="lastcase">
+                                {# HEADLINE #}
+                                <p class="mycases-subheadline" id="mylastcase-headline">My last case</p>
+                                {# COMPONENT (ICON+DATA) #}
+                                <div class="case-component" id="mylastcase-content">
+                                    {# ICON #}
+                                    <div class="case-icon">
+                                        {% if last_case %}
+                                        {% icon "archive" class="svg-white" height="90" width="90" %}
+                                        {% else %}
+                                        {% icon "x" class="svg-white" height="90" width="90" %}
+                                        {% endif %}
+                                    </div>
+                                    {# DATA #}
+                                    <div class="case-data">
+                                        {# LAST CASE #}
+                                        {% if last_case %}
+                                        <div class="start">
+                                            <p class="company">{{ last_case.company }}</p>
+                                            <p class="industry">{{ last_case.industry }}</p>
+                                            <p class="date">Sent: {{ last_case.created_at|date:"d/m/Y" }}</p>
+                                        </div>
+                                        <div class="end">
+                                            <p>Thank you for helping Agilos.</p>
+                                        </div>
+                                        {% else %}
+                                        <div class="start">
+                                            <p>N/A</p>
+                                            <p>Industry: N/A</p>
+                                            <p>N/A</p>
+                                        </div>
+                                        <div class="end">
+                                            <p>No cases.</p>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {# DOWN #}
+                            <div class="block" id="current-year-cases-count">
+                                {# HEADLINE #}
+                                <p class="mycases-subheadline" id="cycc-headline">Target {% now "Y" %}</p>
+                                {# COMPONENT (ICON+DATA) #}
+                                <div class="case-component" id="cycc-content">
+                                    {# ICON #}
+                                    <div class="case-icon">
+                                        {% icon "archive" class="svg-white" height="90" width="90" %}
+                                    </div>
+                                    {# DATA #}
+                                    <div class="case-data">
+                                        {# NUMBER OF CASES FROM CURRENT YEAR #}
+                                        {% if current_year_cases_count >= 0 %}
+                                        <p id="mycases-target">{{ current_year_cases_count }}/1</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="sendcase">
+                                <a href="{% url 'consultants:sendcase' %}">Send a case</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </main>
     {% endblock side_container %}
 {% endif %}
