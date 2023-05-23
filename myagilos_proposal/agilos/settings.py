@@ -28,7 +28,7 @@ DEBUG = bool(int(os.environ.get("DEBUG", 0)))
 ADMINS = []
 if ADMINS_ENV := os.environ.get("ADMINS", None):
     ADMINS_ENV = [
-        (admin.split(":")[0], admin.split(":")[1])
+        (f"{admin.split(':')[0].split('_')[0].capitalize()} {admin.split(':')[0].split('_')[1].capitalize()}", admin.split(":")[1])
         for admin in ADMINS_ENV.split("%")
     ]
 
