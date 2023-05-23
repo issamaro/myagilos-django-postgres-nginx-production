@@ -25,11 +25,16 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "changeme")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get("DEBUG", 0)))
 
+ADMINS = []
+if ADMINS_ENV := os.environ.get("ADMINS", None):
+    ADMINS_ENV = [
+        (admin.split(":")[0], admin.split(":")[1])
+        for admin in ADMINS_ENV.split("%")
+    ]
 
+ALLOWED_HOSTS = []
 if ALLOWED_HOSTS_ENV := os.environ.get("ALLOWED_HOSTS", None):
     ALLOWED_HOSTS = [host.strip().lower() for host in ALLOWED_HOSTS_ENV.split(",")]
-else:
-    ALLOWED_HOSTS = []
 
 # HTTPS SETTINGS
 if bool(int(os.environ.get("HTTPS_ON", False))):
@@ -49,6 +54,8 @@ else:
     SECURE_HSTS_SECONDS = 0
     SECURE_HSTS_PRELOAD = False
     SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    
+SESSION_COOKIE_AGE = os.environ.get("SESSION_COOKIE_AGE", "1209600")
 # Application definition
 
 INSTALLED_APPS = [

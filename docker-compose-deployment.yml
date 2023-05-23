@@ -19,6 +19,7 @@ services:
     volumes:
       - static_data:/vol/web
     environment:
+      - ADMINS=${ADMINS}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
       - DB_HOST=db
       - DB_NAME=${DB_NAME}
@@ -33,6 +34,7 @@ services:
       - SECURE_HSTS_SECONDS=${SECURE_HSTS_SECONDS}
       - SECURE_HSTS_PRELOAD=${SECURE_HSTS_PRELOAD}
       - SECURE_HSTS_INCLUDE_SUBDOMAINS=${SECURE_HSTS_INCLUDE_SUBDOMAINS}
+      - SESSION_COOKIE_AGE=${SESSION_COOKIE_AGE}
       - HR_MAIL=${HR_MAIL}
       - MANAGER_MAIL=${MANAGER_MAIL}
       - MKT_MAIL=${MKT_MAIL}
