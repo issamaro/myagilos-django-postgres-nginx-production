@@ -4,9 +4,9 @@ services:
     image: postgres:15.3-alpine
     container_name: db
     environment:
-      - POSTGRES_DB=postgresdb
-      - POSTGRES_USER=postgresuser
-      - POSTGRES_PASSWORD=postgrespassword
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
       - LANG=en_US.utf8
       - LC_ALL=en_US.utf8
     volumes:
@@ -21,12 +21,19 @@ services:
     volumes:
       - static_data:/vol/web
     environment:
-      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - ALLOWED_HOSTS=ec2-13-48-56-186.eu-north-1.compute.amazonaws.com
       - DB_HOST=db
-      - DB_NAME=postgresdb
-      - DB_USER=postgresuser
-      - DB_PASS=postgrespassword
-      - DEBUG=1
+      - DB_NAME=n
+      - DB_USER=u
+      - DB_PASS=p
+      - SECRET_KEY=sss
+      - HR_MAIL=${HR_MAIL}
+      - MANAGER_MAIL=${MANAGER_MAIL}
+      - MKT_MAIL=${MKT_MAIL}
+      - MAIL_SENDER=${MAIL_SENDER}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_ENDING=${MAIL_ENDING}
+      - DEBUG=${DEBUG}
     depends_on:
       - db
     restart: always
