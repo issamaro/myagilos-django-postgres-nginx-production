@@ -4,9 +4,9 @@ services:
     image: postgres:15.3-alpine
     container_name: db
     environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=n
+      - POSTGRES_USER=u
+      - POSTGRES_PASSWORD=p
       - LANG=en_US.utf8
       - LC_ALL=en_US.utf8
     volumes:
