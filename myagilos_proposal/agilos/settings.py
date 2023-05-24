@@ -25,12 +25,12 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "changeme")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get("DEBUG", 0)))
 
-ADMINS = []
-if ADMINS_ENV := os.environ.get("ADMINS", None):
-    ADMINS_ENV = [
-        (f"{admin.split(':')[0].split('_')[0].capitalize()} {admin.split(':')[0].split('_')[1].capitalize()}", admin.split(":")[1])
-        for admin in ADMINS_ENV.split("%")
-    ]
+# ADMINS = []
+# if ADMINS_ENV := os.environ.get("ADMINS", None):
+#     ADMINS_ENV = [
+#         (f"{admin.split(':')[0].split('_')[0].capitalize()} {admin.split(':')[0].split('_')[1].capitalize()}", admin.split(":")[1])
+#         for admin in ADMINS_ENV.split("%")
+#     ]
 
 ALLOWED_HOSTS = []
 if ALLOWED_HOSTS_ENV := os.environ.get("ALLOWED_HOSTS", None):
