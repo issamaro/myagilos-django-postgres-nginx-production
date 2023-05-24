@@ -59,7 +59,7 @@ for user in RESPONSIBLE_USERS.items():
         user["USER"] = User.objects.get(email=user["MAIL"])
     except User.DoesNotExist:
         user["USER"] = None
-        user["FIRST_NAME"] = None
+        user["FIRST_NAME"] = "ToDefine"
     else:
         user["FIRST_NAME"] = user["USER"].first_name
 # ----------TIME VARIABLES----------
@@ -303,7 +303,7 @@ def sendcase(request):
             form.instance.author = request.user.as_consultant
             form.save()
             received_case_mail_info = {
-                "first_name": RESPONSIBLE_USERS["MKT"]["USER"].first_name,
+                "first_name": RESPONSIBLE_USERS["MKT"]["FIRST_NAME"],
                 "sender_first_name": request.user.first_name,
                 "sender_last_name": request.user.last_name,
                 "company": form.cleaned_data["company"],
