@@ -14,8 +14,6 @@ services:
     volumes:
       - postgresql_data:/var/lib/postgresql/data
     restart: always
-    ports:
-      - 5432:5432
 
   myagilos:
     image: myagilos:1.0.0
