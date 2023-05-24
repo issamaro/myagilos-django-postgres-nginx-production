@@ -22,7 +22,7 @@ services:
       - static_data:/vol/web
     environment:
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
-      - DB_HOST=dbhost
+      - DB_HOST=db
       - DB_NAME=postgresdb
       - DB_USER=postgresuser
       - DB_PASS=postgrespassword
