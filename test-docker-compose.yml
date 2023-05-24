@@ -1,0 +1,49 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:15.3-alpine
+    container_name: db
+    environment:
+      - POSTGRES_DB=postgresdb
+      - POSTGRES_USER=postgresuser
+      - POSTGRES_PASSWORD=postgrespassword
+      - LANG=en_US.utf8
+      - LC_ALL=en_US.utf8
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    restart: always
+
+  myagilos:
+    image: myagilos:1.0.0
+    container_name: myagilos
+    build:
+      context: .
+    volumes:
+      - static_data:/vol/web
+    environment:
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - DB_HOST=dbhost
+      - DB_NAME=postgresdb
+      - DB_USER=postgresuser
+      - DB_PASS=postgrespassword
+      - DEBUG=1
+    depends_on:
+      - db
+    restart: always
+
+  proxy:
+    image: myagilos-proxy:1.0.0
+    container_name: myagilos-proxy
+    build:
+      context: ./proxy
+    volumes:
+      - static_data:/vol/static
+    ports:
+      - 80:8000
+    depends_on:
+      - myagilos
+    restart: always
+
+volumes:
+  static_data:
+  postgresql_data:
