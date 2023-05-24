@@ -111,7 +111,7 @@ WSGI_APPLICATION = "agilos.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": os.environ.get("DB_HOST", "dbhost"),
+        "HOST": os.environ.get("DB_HOST", "db"),
         "NAME": os.environ.get("DB_NAME", "postgresdb"),
         "USER": os.environ.get("DB_USER", "postgresuser"),
         "PASSWORD": os.environ.get("DB_PASS", "postgrespassword"),
