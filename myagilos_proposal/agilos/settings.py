@@ -55,7 +55,7 @@ else:
     SECURE_HSTS_PRELOAD = False
     SECURE_HSTS_INCLUDE_SUBDOMAINS = False
     
-SESSION_COOKIE_AGE = os.environ.get("SESSION_COOKIE_AGE", "1209600")
+SESSION_COOKIE_AGE = int(os.environ.get("SESSION_COOKIE_AGE", "1209600"))
 # Application definition
 
 INSTALLED_APPS = [
