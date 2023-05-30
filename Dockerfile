@@ -5,7 +5,8 @@ ENV PATH="/scripts:${PATH}"
 ENV PATH="/usr/lib/postgresql/X.Y/bin/:${PATH}"
 
 COPY ./requirements.txt /requirements.txt
-RUN apk add --update --no-cache --virtual .tmp gcc libc-dev linux-headers && \
+RUN apk add --update --no-cache netcat-openbsd && \
+    apk add --update --no-cache --virtual .tmp gcc libc-dev linux-headers && \
     apk add --update --no-cache postgresql-client && \
     apk add --update --no-cache --virtual .tmp-deps \
         build-base postgresql15-dev musl-dev \
