@@ -2,7 +2,8 @@
 
 set -e
 
-python manage.py wait_for_db
-python manage.py collectstatic --no-input
-python manage.py migrate
-uwsgi --socket :8000 --master --enable-threads --module agilos.wsgi
+echo "Running wait_for_db script..." && python manage.py wait_for_db
+echo "making migrations..." && python manage.py makemigrations
+echo "trying to migrate..." && python manage.py migrate
+echo "collecting static files..." && python manage.py collectstatic --no-input
+echo "activating uwsgi..." && uwsgi --socket :8000 --master --enable-threads --module agilos.wsgi

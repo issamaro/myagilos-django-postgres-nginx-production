@@ -1,11 +1,12 @@
-from datetime import timedelta
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.db.models import Q
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse
 from django.utils import timezone
+from datetime import timedelta
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET
 from .forms import AddCertificationForm, CasesForm, ForgotPasswordForm, ResetPasswordForm
@@ -20,48 +21,49 @@ LOGIN_TEMPLATE = "consultants/logs/login.html"
 FORGOT_PASSWORD_TEMPLATE = "consultants/logs/forgot_password.html"
 RESET_PASSWORD_TEMPLATE = "consultants/logs/reset_password.html"
 SUCCESS_MESSAGE = "Successfully sent. Thank you."
+# ----------EMAIL TEMPLATES----------
+RESET_EMAIL_TXT = "consultants/templates_files/reset_email.txt"
+RESET_CONFIRMATION_EMAIL_TXT = "consultants/templates_files/reset_email_confirm.txt"
+RECEIVED_CASE_EMAIL_TXT = "consultants/templates_files/received_case_email.txt"
+RECEIVED_CERTIFICATION_EMAIL_TXT = "consultants/templates_files/received_certification_email.txt"
+MAIL_ENDING = os.environ.get("MAIL_ENDING", "The Company Support Team")
+# ----------RESPONSIBLE USERS----------
+RESPONSIBLE_USERS = {
+    "MANAGER": {
+        "MAIL": os.environ.get("MANAGER_MAIL", None),
+        "USER": None,
+        "FIRST_NAME": None
+    },
+    "MKT": {
+        "MAIL": os.environ.get("MKT_MAIL", None),
+        "USER": None,
+        "FIRST_NAME": None
+    },
+    "HR": {
+        "MAIL": os.environ.get("HR_MAIL", None),
+        "USER": None,
+        "FIRST_NAME": None
+    }
+}
+for key, user in RESPONSIBLE_USERS.items():
+    if user["MAIL"]:
+        user["USER"], created = User.objects.get_or_create(email=user["MAIL"])
+        if created:
+            user["FIRST_NAME"] = "to define"
+        else:
+            user["FIRST_NAME"] = user["USER"].first_name
+    else:
+        del RESPONSIBLE_USERS[key]
+# ----------MYAGILOS SUPPORT MAIL----------
+MYAGILOS_SUPPORT_MAIL = os.environ.get("SENDER_MAIL", None)
+MYAGILOS_SUPPORT_PASSWORD = os.environ.get("SENDER_PASSWORD", None)
+support = all(MYAGILOS_SUPPORT_MAIL, MYAGILOS_SUPPORT_PASSWORD)
 # ----------NORMAL PAGES TEMPLATES----------
 HOME_TEMPLATE = "consultants/mains/home.html"
 SENDCASE_TEMPLATE = "consultants/mains/sendcase.html"
 MYCASES_TEMPLATE = "consultants/mains/mycases.html"
 ADDCERTIFICATION_TEMPLATE = "consultants/mains/addcertification.html"
 MYCERTIFICATIONS_TEMPLATE = "consultants/mains/mycertifications.html"
-# ----------EMAIL TEMPLATES----------
-RESET_EMAIL_TXT = "consultants/templates_files/reset_email.txt"
-RESET_CONFIRMATION_EMAIL_TXT = "consultants/templates_files/reset_email_confirm.txt"
-RECEIVED_CASE_EMAIL_TXT = "consultants/templates_files/received_case_email.txt"
-RECEIVED_CERTIFICATION_EMAIL_TXT = "consultants/templates_files/received_certification_email.txt"
-MAIL_ENDING = "The MyAgilos Support Team"
-# ----------MYAGILOS SUPPORT MAIL----------
-MYAGILOS_SUPPORT_MAIL = os.environ.get("MAIL_SENDER")
-MYAGILOS_SUPPORT_PASSWORD = os.environ.get("MAIL_PASSWORD")
-# ----------RESPONSIBLE USERS----------
-RESPONSIBLE_USERS = {
-    "MANAGER": {
-        "MAIL": os.environ.get("MANAGER_MAIL"),
-        "USER": None,
-        "FIRST_NAME": None
-    },
-    "MKT": {
-        "MAIL": os.environ.get("MKT_MAIL"),
-        "USER": None,
-        "FIRST_NAME": None
-    },
-    "HR": {
-        "MAIL": os.environ.get("HR_MAIL"),
-        "USER": None,
-        "FIRST_NAME": None
-    }
-}
-for user in RESPONSIBLE_USERS.items():
-    user = user[1]
-    try:
-        user["USER"] = User.objects.get(email=user["MAIL"])
-    except User.DoesNotExist:
-        user["USER"] = None
-        user["FIRST_NAME"] = "ToDefine"
-    else:
-        user["FIRST_NAME"] = user["USER"].first_name
 # ----------TIME VARIABLES----------
 CURRENT_YEAR = timezone.now().year
 CURRENT_DATE = timezone.now().date()
@@ -154,7 +156,7 @@ def forgot_password(request):
                 with open(RESET_EMAIL_TXT, "r") as emailf:
                     body = f"{emailf.read()}".format(
                         first_name=user.first_name, reset_url=reset_url)
-                if MYAGILOS_SUPPORT_MAIL and MYAGILOS_SUPPORT_PASSWORD:
+                if support:
                     sendemail(
                         sender=MYAGILOS_SUPPORT_MAIL,
                         password=MYAGILOS_SUPPORT_PASSWORD,
@@ -164,7 +166,7 @@ def forgot_password(request):
                     )
                     return HttpResponse(f"Email sent to {email}.")
                 else:
-                    return HttpResponse("Email not sent: automated mailbox configuration error. Please, contact the IT Support.")
+                    return HttpResponse("Problem with mailbox. Contact your IT Support Team.")
         else:
             return render(request, FORGOT_PASSWORD_TEMPLATE, {
                 "form": form
@@ -183,10 +185,9 @@ def reset_password(request, token):
         if form.is_valid():
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
-            current_time = timezone.now()
             try:
                 forgot_case = ForgotPassword.objects.get(
-                    username=username, active=True, expires_at__gt=current_time)
+                    username=username, active=True, expires_at__gt=CURRENT_DATETIME)
             except ForgotPassword.DoesNotExist:
                 return render(request, RESET_PASSWORD_TEMPLATE, {
                     "form": form,
@@ -205,10 +206,10 @@ def reset_password(request, token):
 
                     ForgotPassword.objects.filter(
                         salt_and_hash=forgot_case.salt_and_hash).update(active=False)
-                    with open(RESET_CONFIRMATION_EMAIL_TXT, "r") as emailf:
-                        emailbody = f"{emailf.read()}".format(
-                            first_name=user.first_name)
-                    if MYAGILOS_SUPPORT_MAIL and MYAGILOS_SUPPORT_PASSWORD:
+                    if support:
+                        with open(RESET_CONFIRMATION_EMAIL_TXT, "r") as emailf:
+                            emailbody = f"{emailf.read()}".format(
+                                first_name=user.first_name)
                         sendemail(
                             sender=MYAGILOS_SUPPORT_MAIL,
                             password=MYAGILOS_SUPPORT_PASSWORD,
@@ -216,9 +217,11 @@ def reset_password(request, token):
                             subject=f"{user.first_name}, your password has been reset.",
                             body=emailbody
                         )
-                    return render(request, LOGIN_TEMPLATE, {
-                        "success": "Password successfully reset."
-                    })
+                        return render(request, LOGIN_TEMPLATE, {
+                            "success": "Password successfully reset."
+                        })
+                    else:
+                        return HttpResponse("Password successfully reset.\nYou will not receive any mail because of a mailbox problem.\nPlease, contact your IT support Team.")
                 else:
                     return render(request, RESET_PASSWORD_TEMPLATE, {
                         "form": form,
@@ -294,7 +297,6 @@ def home(request):
         })
 
 
-
 @login_required
 def sendcase(request):
     if request.method == "POST":
@@ -302,34 +304,37 @@ def sendcase(request):
         if form.is_valid():
             form.instance.author = request.user.as_consultant
             form.save()
-            received_case_mail_info = {
-                "first_name": RESPONSIBLE_USERS["MKT"]["FIRST_NAME"],
-                "sender_first_name": request.user.first_name,
-                "sender_last_name": request.user.last_name,
-                "company": form.cleaned_data["company"],
-                "industry": form.cleaned_data["industry"],
-                "project_start": form.cleaned_data["project_end"],
-                "project_end": form.cleaned_data["project_end"],
-                "issue": form.cleaned_data["issue"],
-                "architecture": form.cleaned_data["architecture"],
-                "challenge": form.cleaned_data["challenge"],
-                "solution": form.cleaned_data["solution"],
-                "tools": form.cleaned_data["tools"],
-                "why_agilos": form.cleaned_data["why_agilos"],
-                "gpt_content": form.cleaned_data["gpt_content"],
-                "mail_ending": MAIL_ENDING
-            }
-            with open(RECEIVED_CASE_EMAIL_TXT, "r") as emailf:
-                emailbody = f"{emailf.read()}".format(
-                    **received_case_mail_info)
-            sendemail(
-                sender=MYAGILOS_SUPPORT_MAIL,
-                password=MYAGILOS_SUPPORT_PASSWORD,
-                receiver=RESPONSIBLE_USERS["MKT"]["MAIL"],
-                subject=f"{received_case_mail_info['first_name']}, a new case has been sent.",
-                body=emailbody
-            )
-            return redirect(reverse("consultants:mycases"))
+            if support and RESPONSIBLE_USERS["MKT"]:
+                received_case_mail_info = {
+                    "first_name": RESPONSIBLE_USERS["MKT"]["FIRST_NAME"],
+                    "sender_first_name": request.user.first_name,
+                    "sender_last_name": request.user.last_name,
+                    "company": form.cleaned_data["company"],
+                    "industry": form.cleaned_data["industry"],
+                    "project_start": form.cleaned_data["project_end"],
+                    "project_end": form.cleaned_data["project_end"],
+                    "issue": form.cleaned_data["issue"],
+                    "architecture": form.cleaned_data["architecture"],
+                    "challenge": form.cleaned_data["challenge"],
+                    "solution": form.cleaned_data["solution"],
+                    "tools": form.cleaned_data["tools"],
+                    "why_agilos": form.cleaned_data["why_agilos"],
+                    "gpt_content": form.cleaned_data["gpt_content"],
+                    "mail_ending": MAIL_ENDING
+                }
+                with open(RECEIVED_CASE_EMAIL_TXT, "r") as emailf:
+                    emailbody = f"{emailf.read()}".format(
+                        **received_case_mail_info)
+                sendemail(
+                    sender=MYAGILOS_SUPPORT_MAIL,
+                    password=MYAGILOS_SUPPORT_PASSWORD,
+                    receiver=RESPONSIBLE_USERS["MKT"]["MAIL"],
+                    subject=f"{received_case_mail_info['first_name']}, a new case has been sent.",
+                    body=emailbody
+                )
+                return redirect(reverse("consultants:mycases"))
+            else:
+                return redirect(reverse("consultants:mycases"))
         else:
             return render(request, SENDCASE_TEMPLATE, {
                 "form": form

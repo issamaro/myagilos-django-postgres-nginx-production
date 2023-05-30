@@ -3,12 +3,10 @@ services:
   db:
     image: postgres:15.3-alpine
     container_name: db
-    expose:
-      - 5432
     environment:
-      - POSTGRES_DB=n
-      - POSTGRES_USER=u
-      - POSTGRES_PASSWORD=p
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
       - LANG=en_US.utf8
       - LC_ALL=en_US.utf8
     volumes:
@@ -23,12 +21,12 @@ services:
     volumes:
       - static_data:/vol/web
     environment:
-      - ALLOWED_HOSTS=ec2-13-48-56-186.eu-north-1.compute.amazonaws.com
-      - DB_HOST=db
-      - DB_NAME=n
-      - DB_USER=u
-      - DB_PASS=p
-      - SECRET_KEY=sss
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - SECRET_KEY=${SECRET_KEY}
       - HR_MAIL=${HR_MAIL}
       - MANAGER_MAIL=${MANAGER_MAIL}
       - MKT_MAIL=${MKT_MAIL}
@@ -48,7 +46,7 @@ services:
     volumes:
       - static_data:/vol/static
     ports:
-      - 80:8000
+      - 80:80
     depends_on:
       - myagilos
     restart: always
