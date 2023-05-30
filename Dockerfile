@@ -34,4 +34,4 @@ RUN chmod -R 755 /vol/web && \
 # RUN chmod 664 /app/db.sqlite3
 
 USER user
-CMD ["entrypoint.sh"]
+CMD ["/scripts/entrypoint.sh"]
