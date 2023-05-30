@@ -55,9 +55,9 @@ for key, user in RESPONSIBLE_USERS.items():
     else:
         del RESPONSIBLE_USERS[key]
 # ----------MYAGILOS SUPPORT MAIL----------
-MYAGILOS_SUPPORT_MAIL = os.environ.get("SENDER_MAIL", None)
-MYAGILOS_SUPPORT_PASSWORD = os.environ.get("SENDER_PASSWORD", None)
-support = all(MYAGILOS_SUPPORT_MAIL, MYAGILOS_SUPPORT_PASSWORD)
+MYAGILOS_SUPPORT_MAIL = os.environ.get("SUPPORT_MAIL", None)
+MYAGILOS_SUPPORT_PASSWORD = os.environ.get("SUPPORT_PASSWORD", None)
+support = all([MYAGILOS_SUPPORT_MAIL, MYAGILOS_SUPPORT_PASSWORD])
 # ----------NORMAL PAGES TEMPLATES----------
 HOME_TEMPLATE = "consultants/mains/home.html"
 SENDCASE_TEMPLATE = "consultants/mains/sendcase.html"
@@ -155,7 +155,7 @@ def forgot_password(request):
                     reverse("consultants:reset_password", args=[secret_token]))
                 with open(RESET_EMAIL_TXT, "r") as emailf:
                     body = f"{emailf.read()}".format(
-                        first_name=user.first_name, reset_url=reset_url)
+                        first_name=user.first_name, reset_url=reset_url, mail_ending=MAIL_ENDING)
                 if support:
                     sendemail(
                         sender=MYAGILOS_SUPPORT_MAIL,
@@ -209,7 +209,7 @@ def reset_password(request, token):
                     if support:
                         with open(RESET_CONFIRMATION_EMAIL_TXT, "r") as emailf:
                             emailbody = f"{emailf.read()}".format(
-                                first_name=user.first_name)
+                                first_name=user.first_name, mail_ending=MAIL_ENDING)
                         sendemail(
                             sender=MYAGILOS_SUPPORT_MAIL,
                             password=MYAGILOS_SUPPORT_PASSWORD,
@@ -374,35 +374,38 @@ def addcertification(request):
                         "error": "Already exists."
                     })
             else:
-                received_certification_mail_info = {
-                    "sender_first_name": request.user.first_name,
-                    "sender_last_name": request.user.last_name,
-                    "company": form.cleaned_data["company"],
-                    "title": form.cleaned_data["title"],
-                    "earned_at": form.cleaned_data["earned_at"],
-                    "certifications_from_company": Consultant_certifications.objects.filter(
-                        certification__company=form.cleaned_data["company"]
-                    ).count(),
-                    "this_certification_count": Consultant_certifications.objects.filter(
-                        certification__code=form.cleaned_data["title"].split(
-                            " - ", 1)[0]
-                    ).count(),
-                    "mail_ending": MAIL_ENDING
-                }
-                for USER in RESPONSIBLE_USERS.items():
-                    USER = USER[1]
-                    received_certification_mail_info["first_name"] = USER["FIRST_NAME"]
-                    with open(RECEIVED_CERTIFICATION_EMAIL_TXT, "r") as rf:
-                        emailbody = f"{rf.read()}".format(
-                            **received_certification_mail_info)
-                    sendemail(
-                        sender=MYAGILOS_SUPPORT_MAIL,
-                        password=MYAGILOS_SUPPORT_PASSWORD,
-                        receiver=USER["MAIL"],
-                        subject=f"{USER['FIRST_NAME']}, {request.user.first_name} {request.user.last_name} has passed a new certification!",
-                        body=emailbody
-                    )
-                return redirect(reverse("consultants:mycertifications"))
+                if support:
+                    received_certification_mail_info = {
+                        "sender_first_name": request.user.first_name,
+                        "sender_last_name": request.user.last_name,
+                        "company": form.cleaned_data["company"],
+                        "title": form.cleaned_data["title"],
+                        "earned_at": form.cleaned_data["earned_at"],
+                        "certifications_from_company": Consultant_certifications.objects.filter(
+                            certification__company=form.cleaned_data["company"]
+                        ).count(),
+                        "this_certification_count": Consultant_certifications.objects.filter(
+                            certification__code=form.cleaned_data["title"].split(
+                                " - ", 1)[0]
+                        ).count(),
+                        "mail_ending": MAIL_ENDING
+                    }
+                    for USER in RESPONSIBLE_USERS.items():
+                        USER = USER[1]
+                        received_certification_mail_info["first_name"] = USER["FIRST_NAME"]
+                        with open(RECEIVED_CERTIFICATION_EMAIL_TXT, "r") as rf:
+                            emailbody = f"{rf.read()}".format(
+                                **received_certification_mail_info)
+                        sendemail(
+                            sender=MYAGILOS_SUPPORT_MAIL,
+                            password=MYAGILOS_SUPPORT_PASSWORD,
+                            receiver=USER["MAIL"],
+                            subject=f"{USER['FIRST_NAME']}, {request.user.first_name} {request.user.last_name} has passed a new certification!",
+                            body=emailbody
+                        )
+                    return redirect(reverse("consultants:mycertifications"))
+                else:
+                    return redirect(reverse("consultants:mycertificaitons"))
         else:
             return render(request, ADDCERTIFICATION_TEMPLATE, {
                 "form": form
