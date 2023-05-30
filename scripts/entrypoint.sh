@@ -5,7 +5,7 @@ set -e
 # wait-for-it functionality
 WAITFORIT_HOST="db" # adjust to your database host
 WAITFORIT_PORT=5432 # adjust to your database port
-WAITFORIT_TIMEOUT=15
+WAITFORIT_TIMEOUT=5
 WAITFORIT_STRICT=0
 WAITFORIT_QUIET=0
 
