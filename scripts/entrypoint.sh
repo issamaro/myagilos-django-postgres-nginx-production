@@ -11,7 +11,7 @@ WAITFORIT_QUIET=0
 
 wait_for()
 {
-    if [[ $WAITFORIT_TIMEOUT -gt 0 ]]; then
+    if [ "$WAITFORIT_TIMEOUT" -gt 0 ]; then
         echo "Waiting $WAITFORIT_TIMEOUT seconds for $WAITFORIT_HOST:$WAITFORIT_PORT"
     else
         echo "Waiting for $WAITFORIT_HOST:$WAITFORIT_PORT without a timeout"
@@ -19,9 +19,9 @@ wait_for()
     start_ts=$(date +%s)
     while :
     do
-        (echo -n > /dev/tcp/$WAITFORIT_HOST/$WAITFORIT_PORT) >/dev/null 2>&1
+        nc -z "$WAITFORIT_HOST" "$WAITFORIT_PORT" > /dev/null 2>&1
         result=$?
-        if [[ $result -eq 0 ]]; then
+        if [ $result -eq 0 ]; then
             end_ts=$(date +%s)
             echo "$WAITFORIT_HOST:$WAITFORIT_PORT is available after $((end_ts - start_ts)) seconds"
             break
