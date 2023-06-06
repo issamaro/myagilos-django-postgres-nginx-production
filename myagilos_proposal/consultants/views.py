@@ -405,7 +405,7 @@ def addcertification(request):
                         )
                     return redirect(reverse("consultants:mycertifications"))
                 else:
-                    return redirect(reverse("consultants:mycertificaitons"))
+                    return redirect(reverse("consultants:mycertifications"))
         else:
             return render(request, ADDCERTIFICATION_TEMPLATE, {
                 "form": form
