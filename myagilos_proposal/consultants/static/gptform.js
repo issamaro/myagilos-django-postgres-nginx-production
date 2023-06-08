@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const items = Object.fromEntries(formData);
 
         // API TO OPENAI: parameters
-        const GPT_KEY = "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";
+        const GPT_KEY = "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";
         const gptURL = "https://api.openai.com/v1/completions";
         const gptRequest = new Request(
             gptURL,
