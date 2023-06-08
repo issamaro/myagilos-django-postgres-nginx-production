@@ -31,29 +31,17 @@ MAIL_ENDING = os.environ.get("MAIL_ENDING", "The Company Support Team")
 RESPONSIBLE_USERS = {
     "MANAGER": {
         "MAIL": os.environ.get("MANAGER_MAIL", None),
-        "USER": None,
-        "FIRST_NAME": None
+        "FIRST_NAME": os.environ.get("MANAGER_FIRSTNAME", None)
     },
     "MKT": {
         "MAIL": os.environ.get("MKT_MAIL", None),
-        "USER": None,
-        "FIRST_NAME": None
+        "FIRST_NAME": os.environ.get("MKT_FIRSTNAME", None)
     },
     "HR": {
         "MAIL": os.environ.get("HR_MAIL", None),
-        "USER": None,
-        "FIRST_NAME": None
+        "FIRST_NAME": os.environ.get("HR_FIRSTNAME", None)
     }
 }
-# for key, user in RESPONSIBLE_USERS.items():
-#     if user["MAIL"]:
-#         user["USER"], created = User.objects.get_or_create(email=user["MAIL"])
-#         if created:
-#             user["FIRST_NAME"] = "to define"
-#         else:
-#             user["FIRST_NAME"] = user["USER"].first_name
-#     else:
-#         del RESPONSIBLE_USERS[key]
 # ----------MYAGILOS SUPPORT MAIL----------
 MYAGILOS_SUPPORT_MAIL = os.environ.get("SUPPORT_MAIL", None)
 MYAGILOS_SUPPORT_PASSWORD = os.environ.get("SUPPORT_PASSWORD", None)
